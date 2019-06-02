@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.ZudanMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.Zudan" >
+    <id column="zdid" property="zdid" jdbcType="VARCHAR" />
+    <result column="zuname" property="zuname" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="zutel" property="zutel" jdbcType="VARCHAR" />
+    <result column="zucardid" property="zucardid" jdbcType="VARCHAR" />
+    <result column="zhtitle" property="zhtitle" jdbcType="VARCHAR" />
+    <result column="houseid" property="houseid" jdbcType="VARCHAR" />
+    <result column="zhimg" property="zhimg" jdbcType="VARCHAR" />
+    <result column="zmname" property="zmname" jdbcType="VARCHAR" />
+    <result column="masterid" property="masterid" jdbcType="VARCHAR" />
+    <result column="mtel" property="mtel" jdbcType="VARCHAR" />
+    <result column="zimg" property="zimg" jdbcType="VARCHAR" />
+    <result column="zhtstatus" property="zhtstatus" jdbcType="VARCHAR" />
+    <result column="zjfstatus" property="zjfstatus" jdbcType="VARCHAR" />
+    <result column="zprice" property="zprice" jdbcType="VARCHAR" />
+    <result column="zstime" property="zstime" jdbcType="VARCHAR" />
+    <result column="zetime" property="zetime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    zdid, zuname, userid, zutel, zucardid, zhtitle, houseid, zhimg, zmname, masterid, 
+    mtel, zimg, zhtstatus, zjfstatus, zprice, zstime, zetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from zudan
+    where zdid = #{zdid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from zudan
+    where zdid = #{zdid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.Zudan" >
+    insert into zudan (zdid, zuname, userid, 
+      zutel, zucardid, zhtitle, 
+      houseid, zhimg, zmname, 
+      masterid, mtel, zimg, 
+      zhtstatus, zjfstatus, zprice, 
+      zstime, zetime)
+    values (#{zdid,jdbcType=VARCHAR}, #{zuname,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, 
+      #{zutel,jdbcType=VARCHAR}, #{zucardid,jdbcType=VARCHAR}, #{zhtitle,jdbcType=VARCHAR}, 
+      #{houseid,jdbcType=VARCHAR}, #{zhimg,jdbcType=VARCHAR}, #{zmname,jdbcType=VARCHAR}, 
+      #{masterid,jdbcType=VARCHAR}, #{mtel,jdbcType=VARCHAR}, #{zimg,jdbcType=VARCHAR}, 
+      #{zhtstatus,jdbcType=VARCHAR}, #{zjfstatus,jdbcType=VARCHAR}, #{zprice,jdbcType=VARCHAR}, 
+      #{zstime,jdbcType=VARCHAR}, #{zetime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.Zudan" >
+    insert into zudan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zdid != null" >
+        zdid,
+      </if>
+      <if test="zuname != null" >
+        zuname,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="zutel != null" >
+        zutel,
+      </if>
+      <if test="zucardid != null" >
+        zucardid,
+      </if>
+      <if test="zhtitle != null" >
+        zhtitle,
+      </if>
+      <if test="houseid != null" >
+        houseid,
+      </if>
+      <if test="zhimg != null" >
+        zhimg,
+      </if>
+      <if test="zmname != null" >
+        zmname,
+      </if>
+      <if test="masterid != null" >
+        masterid,
+      </if>
+      <if test="mtel != null" >
+        mtel,
+      </if>
+      <if test="zimg != null" >
+        zimg,
+      </if>
+      <if test="zhtstatus != null" >
+        zhtstatus,
+      </if>
+      <if test="zjfstatus != null" >
+        zjfstatus,
+      </if>
+      <if test="zprice != null" >
+        zprice,
+      </if>
+      <if test="zstime != null" >
+        zstime,
+      </if>
+      <if test="zetime != null" >
+        zetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zdid != null" >
+        #{zdid,jdbcType=VARCHAR},
+      </if>
+      <if test="zuname != null" >
+        #{zuname,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="zutel != null" >
+        #{zutel,jdbcType=VARCHAR},
+      </if>
+      <if test="zucardid != null" >
+        #{zucardid,jdbcType=VARCHAR},
+      </if>
+      <if test="zhtitle != null" >
+        #{zhtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="houseid != null" >
+        #{houseid,jdbcType=VARCHAR},
+      </if>
+      <if test="zhimg != null" >
+        #{zhimg,jdbcType=VARCHAR},
+      </if>
+      <if test="zmname != null" >
+        #{zmname,jdbcType=VARCHAR},
+      </if>
+      <if test="masterid != null" >
+        #{masterid,jdbcType=VARCHAR},
+      </if>
+      <if test="mtel != null" >
+        #{mtel,jdbcType=VARCHAR},
+      </if>
+      <if test="zimg != null" >
+        #{zimg,jdbcType=VARCHAR},
+      </if>
+      <if test="zhtstatus != null" >
+        #{zhtstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="zjfstatus != null" >
+        #{zjfstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="zprice != null" >
+        #{zprice,jdbcType=VARCHAR},
+      </if>
+      <if test="zstime != null" >
+        #{zstime,jdbcType=VARCHAR},
+      </if>
+      <if test="zetime != null" >
+        #{zetime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.Zudan" >
+    update zudan
+    <set >
+      <if test="zuname != null" >
+        zuname = #{zuname,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="zutel != null" >
+        zutel = #{zutel,jdbcType=VARCHAR},
+      </if>
+      <if test="zucardid != null" >
+        zucardid = #{zucardid,jdbcType=VARCHAR},
+      </if>
+      <if test="zhtitle != null" >
+        zhtitle = #{zhtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="houseid != null" >
+        houseid = #{houseid,jdbcType=VARCHAR},
+      </if>
+      <if test="zhimg != null" >
+        zhimg = #{zhimg,jdbcType=VARCHAR},
+      </if>
+      <if test="zmname != null" >
+        zmname = #{zmname,jdbcType=VARCHAR},
+      </if>
+      <if test="masterid != null" >
+        masterid = #{masterid,jdbcType=VARCHAR},
+      </if>
+      <if test="mtel != null" >
+        mtel = #{mtel,jdbcType=VARCHAR},
+      </if>
+      <if test="zimg != null" >
+        zimg = #{zimg,jdbcType=VARCHAR},
+      </if>
+      <if test="zhtstatus != null" >
+        zhtstatus = #{zhtstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="zjfstatus != null" >
+        zjfstatus = #{zjfstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="zprice != null" >
+        zprice = #{zprice,jdbcType=VARCHAR},
+      </if>
+      <if test="zstime != null" >
+        zstime = #{zstime,jdbcType=VARCHAR},
+      </if>
+      <if test="zetime != null" >
+        zetime = #{zetime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where zdid = #{zdid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.Zudan" >
+    update zudan
+    set zuname = #{zuname,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      zutel = #{zutel,jdbcType=VARCHAR},
+      zucardid = #{zucardid,jdbcType=VARCHAR},
+      zhtitle = #{zhtitle,jdbcType=VARCHAR},
+      houseid = #{houseid,jdbcType=VARCHAR},
+      zhimg = #{zhimg,jdbcType=VARCHAR},
+      zmname = #{zmname,jdbcType=VARCHAR},
+      masterid = #{masterid,jdbcType=VARCHAR},
+      mtel = #{mtel,jdbcType=VARCHAR},
+      zimg = #{zimg,jdbcType=VARCHAR},
+      zhtstatus = #{zhtstatus,jdbcType=VARCHAR},
+      zjfstatus = #{zjfstatus,jdbcType=VARCHAR},
+      zprice = #{zprice,jdbcType=VARCHAR},
+      zstime = #{zstime,jdbcType=VARCHAR},
+      zetime = #{zetime,jdbcType=VARCHAR}
+    where zdid = #{zdid,jdbcType=VARCHAR}
+  </update>
+</mapper>

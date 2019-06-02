@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.HouseMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.House" >
+    <id column="houseid" property="houseid" jdbcType="VARCHAR" />
+    <result column="htitle" property="htitle" jdbcType="VARCHAR" />
+    <result column="himg" property="himg" jdbcType="VARCHAR" />
+    <result column="mname" property="mname" jdbcType="VARCHAR" />
+    <result column="masterid" property="masterid" jdbcType="VARCHAR" />
+    <result column="mtel" property="mtel" jdbcType="VARCHAR" />
+    <result column="hztype" property="hztype" jdbcType="VARCHAR" />
+    <result column="hdistrict" property="hdistrict" jdbcType="VARCHAR" />
+    <result column="haddress" property="haddress" jdbcType="VARCHAR" />
+    <result column="hmetro" property="hmetro" jdbcType="VARCHAR" />
+    <result column="hstation" property="hstation" jdbcType="VARCHAR" />
+    <result column="hdistance" property="hdistance" jdbcType="VARCHAR" />
+    <result column="hprice" property="hprice" jdbcType="VARCHAR" />
+    <result column="hmianji" property="hmianji" jdbcType="VARCHAR" />
+    <result column="hfeature" property="hfeature" jdbcType="VARCHAR" />
+    <result column="hdirection" property="hdirection" jdbcType="VARCHAR" />
+    <result column="hstatus" property="hstatus" jdbcType="VARCHAR" />
+    <result column="hhtype" property="hhtype" jdbcType="VARCHAR" />
+    <result column="hfloorage" property="hfloorage" jdbcType="VARCHAR" />
+    <result column="hlift" property="hlift" jdbcType="VARCHAR" />
+    <result column="hspeizhi" property="hspeizhi" jdbcType="VARCHAR" />
+    <result column="hgpeizhi" property="hgpeizhi" jdbcType="VARCHAR" />
+    <result column="hother" property="hother" jdbcType="VARCHAR" />
+    <result column="hwimg" property="hwimg" jdbcType="VARCHAR" />
+    <result column="hkimg" property="hkimg" jdbcType="VARCHAR" />
+    <result column="hsimg" property="hsimg" jdbcType="VARCHAR" />
+    <result column="hcimg" property="hcimg" jdbcType="VARCHAR" />
+    <result column="hpimg" property="hpimg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    houseid, htitle, himg, mname, masterid, mtel, hztype, hdistrict, haddress, hmetro, 
+    hstation, hdistance, hprice, hmianji, hfeature, hdirection, hstatus, hhtype, hfloorage, 
+    hlift, hspeizhi, hgpeizhi, hother, hwimg, hkimg, hsimg, hcimg, hpimg
+  </sql>
+
+  <select id="selectHouseList" resultType="java.util.Map" parameterType="java.util.Map">
+    select * from house
+    <where>
+      <if test="houseid!=null and houseid !=''">houseid=#{houseid,jdbcType=VARCHAR}</if>
+      <if test="arrHtitle!=null">
+        <foreach collection="arrHtitle" item="htitlePart" index="index">
+          and htitle like "%"#{htitlePart}"%"
+        </foreach>
+      </if>
+      <if test="himg!=null and himg !=''">and himg=#{himg,jdbcType=VARCHAR}</if>
+      <if test="mname!=null and mname !=''">and mname=#{mname,jdbcType=VARCHAR}</if>
+      <if test="masterid!=null and masterid !=''">and masterid=#{masterid,jdbcType=VARCHAR}</if>
+      <if test="mtel!=null and mtel !=''">and mtel=#{mtel,jdbcType=VARCHAR}</if>
+      <if test="hztype!=null and hztype !=''">and hztype=#{hztype,jdbcType=VARCHAR}</if>
+      <if test="hdistrict!=null and hdistrict !=''">and hdistrict=#{hdistrict,jdbcType=VARCHAR}</if>
+      <if test="haddress!=null and haddress !=''">and haddress=#{haddress,jdbcType=VARCHAR}</if>
+      <if test="hmetro!=null and hmetro !=''">and hmetro=#{hmetro,jdbcType=VARCHAR}</if>
+      <if test="hstation!=null and hstation !=''">and hstation=#{hstation,jdbcType=VARCHAR}</if>
+      <if test="hdistance!=null and hdistance !=''">and hdistance=#{hdistance,jdbcType=VARCHAR}</if>
+      <if test="hprice!=null and hprice !=''">
+        <choose>
+          <when test='hprice=="0~1000"'>and hprice+0 BETWEEN 0 and 1000</when>
+          <when test='hprice=="1000~1500"'>and hprice+0 BETWEEN 1000 and 1500</when>
+          <when test='hprice=="1500~2000"'>and hprice+0 BETWEEN 1500 and 2000</when>
+          <when test='hprice=="2000~2500"'>and hprice+0 BETWEEN 2000 and 2500</when>
+          <when test='hprice=="2500以上"'>and hprice+0>=2500</when>
+        </choose>
+      </if>
+      <if test="hmianji!=null and hmianji !=''">
+        <choose>
+          <when test='hmianji="0~15"'>and hmianji+0 BETWEEN 0 and 15</when>
+          <when test='hmianji="15~30"'>and hmianji+0 BETWEEN 15 and 30</when>
+          <when test='hmianji="30~45"'>and hmianji+0 BETWEEN 30 and 45</when>
+          <when test='hmianji="45~60"'>and hmianji+0>=45</when>
+        </choose>
+      </if>
+      <if test="hfeature!=null and hfeature !=''">and hfeature=#{hfeature,jdbcType=VARCHAR}</if>
+      <if test="hdirection!=null and hdirection !=''">and hdirection=#{hdirection,jdbcType=VARCHAR}</if>
+      <if test="hstatus!=null and hstatus !=''">and hstatus=#{hstatus,jdbcType=VARCHAR}</if>
+      <if test="hhtype!=null and hhtype !=''">and hhtype=#{hhtype,jdbcType=VARCHAR}</if>
+      <if test="hfloorage!=null and hfloorage !=''">and hfloorage=#{hfloorage,jdbcType=VARCHAR}</if>
+      <if test="hfloorage!=null and hfloorage !=''">
+        <choose>
+          <when test='hfloorage="0~5层"'>and SUBSTRING(hfloorage,1,1)+0 BETWEEN 0 and 5</when>
+          <when test='hfloorage="5~10层"'>and SUBSTRING(hfloorage,1,1)+0 BETWEEN 5 and 10</when>
+          <when test='hfloorage="10~15层"'>and SUBSTRING(hfloorage,1,1)+0 BETWEEN 10 and 15</when>
+          <when test='hfloorage="15层以上"'>and SUBSTRING(hfloorage,1,1)+0>=15</when>
+        </choose>
+      </if>
+      <if test="hlift!=null and hlift !=''">and hlift=#{hlift,jdbcType=VARCHAR}</if>
+      <if test="hspeizhi!=null and hspeizhi !=''">and hspeizhi=#{hspeizhi,jdbcType=VARCHAR}</if>
+      <if test="hgpeizhi!=null and hgpeizhi !=''">and hgpeizhi=#{hgpeizhi,jdbcType=VARCHAR}</if>
+      <if test="hother!=null and hother !=''">and hother=#{hother,jdbcType=VARCHAR}</if>
+      <if test="hwimg!=null and hwimg !=''">and hwimg=#{hwimg,jdbcType=VARCHAR}</if>
+      <if test="hkimg!=null and hkimg !=''">and hkimg=#{hkimg,jdbcType=VARCHAR}</if>
+      <if test="hsimg!=null and hsimg !=''">and hsimg=#{hsimg,jdbcType=VARCHAR}</if>
+      <if test="hcimg!=null and hcimg !=''">and hcimg=#{hcimg,jdbcType=VARCHAR}</if>
+      <if test="hpimg!=null and hpimg !=''">and hpimg=#{hpimg,jdbcType=VARCHAR}</if>
+    </where>
+    <if test="sortType!=null and sortType !=''">
+      <choose>
+        <when test='sortType=="价格由高到低"'>order by hprice+0 DESC</when>
+        <when test='sortType=="价格由低到高"'>order by hprice+0 ASC</when>
+        <when test='sortType=="面积由高到低"'>order by hmianji DESC</when>
+        <when test='sortType=="面积由低到高"'>order by hmianji ASC</when>
+        <when test='sortType=="面价比由高到低"'>order by ROUND(hprice/hmianji,2) DESC</when>
+      </choose>
+    </if>
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from house
+    where houseid = #{houseid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from house
+    where houseid = #{houseid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.House" >
+    insert into house (houseid, htitle, himg, 
+      mname, masterid, mtel, 
+      hztype, hdistrict, haddress, 
+      hmetro, hstation, hdistance, 
+      hprice, hmianji, hfeature, 
+      hdirection, hstatus, hhtype, 
+      hfloorage, hlift, hspeizhi, 
+      hgpeizhi, hother, hwimg, 
+      hkimg, hsimg, hcimg, 
+      hpimg)
+    values (#{houseid,jdbcType=VARCHAR}, #{htitle,jdbcType=VARCHAR}, #{himg,jdbcType=VARCHAR}, 
+      #{mname,jdbcType=VARCHAR}, #{masterid,jdbcType=VARCHAR}, #{mtel,jdbcType=VARCHAR}, 
+      #{hztype,jdbcType=VARCHAR}, #{hdistrict,jdbcType=VARCHAR}, #{haddress,jdbcType=VARCHAR}, 
+      #{hmetro,jdbcType=VARCHAR}, #{hstation,jdbcType=VARCHAR}, #{hdistance,jdbcType=VARCHAR}, 
+      #{hprice,jdbcType=VARCHAR}, #{hmianji,jdbcType=VARCHAR}, #{hfeature,jdbcType=VARCHAR}, 
+      #{hdirection,jdbcType=VARCHAR}, #{hstatus,jdbcType=VARCHAR}, #{hhtype,jdbcType=VARCHAR}, 
+      #{hfloorage,jdbcType=VARCHAR}, #{hlift,jdbcType=VARCHAR}, #{hspeizhi,jdbcType=VARCHAR}, 
+      #{hgpeizhi,jdbcType=VARCHAR}, #{hother,jdbcType=VARCHAR}, #{hwimg,jdbcType=VARCHAR}, 
+      #{hkimg,jdbcType=VARCHAR}, #{hsimg,jdbcType=VARCHAR}, #{hcimg,jdbcType=VARCHAR}, 
+      #{hpimg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.House" >
+    insert into house
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="houseid != null" >
+        houseid,
+      </if>
+      <if test="htitle != null" >
+        htitle,
+      </if>
+      <if test="himg != null" >
+        himg,
+      </if>
+      <if test="mname != null" >
+        mname,
+      </if>
+      <if test="masterid != null" >
+        masterid,
+      </if>
+      <if test="mtel != null" >
+        mtel,
+      </if>
+      <if test="hztype != null" >
+        hztype,
+      </if>
+      <if test="hdistrict != null" >
+        hdistrict,
+      </if>
+      <if test="haddress != null" >
+        haddress,
+      </if>
+      <if test="hmetro != null" >
+        hmetro,
+      </if>
+      <if test="hstation != null" >
+        hstation,
+      </if>
+      <if test="hdistance != null" >
+        hdistance,
+      </if>
+      <if test="hprice != null" >
+        hprice,
+      </if>
+      <if test="hmianji != null" >
+        hmianji,
+      </if>
+      <if test="hfeature != null" >
+        hfeature,
+      </if>
+      <if test="hdirection != null" >
+        hdirection,
+      </if>
+      <if test="hstatus != null" >
+        hstatus,
+      </if>
+      <if test="hhtype != null" >
+        hhtype,
+      </if>
+      <if test="hfloorage != null" >
+        hfloorage,
+      </if>
+      <if test="hlift != null" >
+        hlift,
+      </if>
+      <if test="hspeizhi != null" >
+        hspeizhi,
+      </if>
+      <if test="hgpeizhi != null" >
+        hgpeizhi,
+      </if>
+      <if test="hother != null" >
+        hother,
+      </if>
+      <if test="hwimg != null" >
+        hwimg,
+      </if>
+      <if test="hkimg != null" >
+        hkimg,
+      </if>
+      <if test="hsimg != null" >
+        hsimg,
+      </if>
+      <if test="hcimg != null" >
+        hcimg,
+      </if>
+      <if test="hpimg != null" >
+        hpimg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="houseid != null" >
+        #{houseid,jdbcType=VARCHAR},
+      </if>
+      <if test="htitle != null" >
+        #{htitle,jdbcType=VARCHAR},
+      </if>
+      <if test="himg != null" >
+        #{himg,jdbcType=VARCHAR},
+      </if>
+      <if test="mname != null" >
+        #{mname,jdbcType=VARCHAR},
+      </if>
+      <if test="masterid != null" >
+        #{masterid,jdbcType=VARCHAR},
+      </if>
+      <if test="mtel != null" >
+        #{mtel,jdbcType=VARCHAR},
+      </if>
+      <if test="hztype != null" >
+        #{hztype,jdbcType=VARCHAR},
+      </if>
+      <if test="hdistrict != null" >
+        #{hdistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="haddress != null" >
+        #{haddress,jdbcType=VARCHAR},
+      </if>
+      <if test="hmetro != null" >
+        #{hmetro,jdbcType=VARCHAR},
+      </if>
+      <if test="hstation != null" >
+        #{hstation,jdbcType=VARCHAR},
+      </if>
+      <if test="hdistance != null" >
+        #{hdistance,jdbcType=VARCHAR},
+      </if>
+      <if test="hprice != null" >
+        #{hprice,jdbcType=VARCHAR},
+      </if>
+      <if test="hmianji != null" >
+        #{hmianji,jdbcType=VARCHAR},
+      </if>
+      <if test="hfeature != null" >
+        #{hfeature,jdbcType=VARCHAR},
+      </if>
+      <if test="hdirection != null" >
+        #{hdirection,jdbcType=VARCHAR},
+      </if>
+      <if test="hstatus != null" >
+        #{hstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="hhtype != null" >
+        #{hhtype,jdbcType=VARCHAR},
+      </if>
+      <if test="hfloorage != null" >
+        #{hfloorage,jdbcType=VARCHAR},
+      </if>
+      <if test="hlift != null" >
+        #{hlift,jdbcType=VARCHAR},
+      </if>
+      <if test="hspeizhi != null" >
+        #{hspeizhi,jdbcType=VARCHAR},
+      </if>
+      <if test="hgpeizhi != null" >
+        #{hgpeizhi,jdbcType=VARCHAR},
+      </if>
+      <if test="hother != null" >
+        #{hother,jdbcType=VARCHAR},
+      </if>
+      <if test="hwimg != null" >
+        #{hwimg,jdbcType=VARCHAR},
+      </if>
+      <if test="hkimg != null" >
+        #{hkimg,jdbcType=VARCHAR},
+      </if>
+      <if test="hsimg != null" >
+        #{hsimg,jdbcType=VARCHAR},
+      </if>
+      <if test="hcimg != null" >
+        #{hcimg,jdbcType=VARCHAR},
+      </if>
+      <if test="hpimg != null" >
+        #{hpimg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.House" >
+    update house
+    <set >
+      <if test="htitle != null" >
+        htitle = #{htitle,jdbcType=VARCHAR},
+      </if>
+      <if test="himg != null" >
+        himg = #{himg,jdbcType=VARCHAR},
+      </if>
+      <if test="mname != null" >
+        mname = #{mname,jdbcType=VARCHAR},
+      </if>
+      <if test="masterid != null" >
+        masterid = #{masterid,jdbcType=VARCHAR},
+      </if>
+      <if test="mtel != null" >
+        mtel = #{mtel,jdbcType=VARCHAR},
+      </if>
+      <if test="hztype != null" >
+        hztype = #{hztype,jdbcType=VARCHAR},
+      </if>
+      <if test="hdistrict != null" >
+        hdistrict = #{hdistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="haddress != null" >
+        haddress = #{haddress,jdbcType=VARCHAR},
+      </if>
+      <if test="hmetro != null" >
+        hmetro = #{hmetro,jdbcType=VARCHAR},
+      </if>
+      <if test="hstation != null" >
+        hstation = #{hstation,jdbcType=VARCHAR},
+      </if>
+      <if test="hdistance != null" >
+        hdistance = #{hdistance,jdbcType=VARCHAR},
+      </if>
+      <if test="hprice != null" >
+        hprice = #{hprice,jdbcType=VARCHAR},
+      </if>
+      <if test="hmianji != null" >
+        hmianji = #{hmianji,jdbcType=VARCHAR},
+      </if>
+      <if test="hfeature != null" >
+        hfeature = #{hfeature,jdbcType=VARCHAR},
+      </if>
+      <if test="hdirection != null" >
+        hdirection = #{hdirection,jdbcType=VARCHAR},
+      </if>
+      <if test="hstatus != null" >
+        hstatus = #{hstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="hhtype != null" >
+        hhtype = #{hhtype,jdbcType=VARCHAR},
+      </if>
+      <if test="hfloorage != null" >
+        hfloorage = #{hfloorage,jdbcType=VARCHAR},
+      </if>
+      <if test="hlift != null" >
+        hlift = #{hlift,jdbcType=VARCHAR},
+      </if>
+      <if test="hspeizhi != null" >
+        hspeizhi = #{hspeizhi,jdbcType=VARCHAR},
+      </if>
+      <if test="hgpeizhi != null" >
+        hgpeizhi = #{hgpeizhi,jdbcType=VARCHAR},
+      </if>
+      <if test="hother != null" >
+        hother = #{hother,jdbcType=VARCHAR},
+      </if>
+      <if test="hwimg != null" >
+        hwimg = #{hwimg,jdbcType=VARCHAR},
+      </if>
+      <if test="hkimg != null" >
+        hkimg = #{hkimg,jdbcType=VARCHAR},
+      </if>
+      <if test="hsimg != null" >
+        hsimg = #{hsimg,jdbcType=VARCHAR},
+      </if>
+      <if test="hcimg != null" >
+        hcimg = #{hcimg,jdbcType=VARCHAR},
+      </if>
+      <if test="hpimg != null" >
+        hpimg = #{hpimg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where houseid = #{houseid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.House" >
+    update house
+    set htitle = #{htitle,jdbcType=VARCHAR},
+      himg = #{himg,jdbcType=VARCHAR},
+      mname = #{mname,jdbcType=VARCHAR},
+      masterid = #{masterid,jdbcType=VARCHAR},
+      mtel = #{mtel,jdbcType=VARCHAR},
+      hztype = #{hztype,jdbcType=VARCHAR},
+      hdistrict = #{hdistrict,jdbcType=VARCHAR},
+      haddress = #{haddress,jdbcType=VARCHAR},
+      hmetro = #{hmetro,jdbcType=VARCHAR},
+      hstation = #{hstation,jdbcType=VARCHAR},
+      hdistance = #{hdistance,jdbcType=VARCHAR},
+      hprice = #{hprice,jdbcType=VARCHAR},
+      hmianji = #{hmianji,jdbcType=VARCHAR},
+      hfeature = #{hfeature,jdbcType=VARCHAR},
+      hdirection = #{hdirection,jdbcType=VARCHAR},
+      hstatus = #{hstatus,jdbcType=VARCHAR},
+      hhtype = #{hhtype,jdbcType=VARCHAR},
+      hfloorage = #{hfloorage,jdbcType=VARCHAR},
+      hlift = #{hlift,jdbcType=VARCHAR},
+      hspeizhi = #{hspeizhi,jdbcType=VARCHAR},
+      hgpeizhi = #{hgpeizhi,jdbcType=VARCHAR},
+      hother = #{hother,jdbcType=VARCHAR},
+      hwimg = #{hwimg,jdbcType=VARCHAR},
+      hkimg = #{hkimg,jdbcType=VARCHAR},
+      hsimg = #{hsimg,jdbcType=VARCHAR},
+      hcimg = #{hcimg,jdbcType=VARCHAR},
+      hpimg = #{hpimg,jdbcType=VARCHAR}
+    where houseid = #{houseid,jdbcType=VARCHAR}
+  </update>
+</mapper>

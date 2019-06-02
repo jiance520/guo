@@ -1,0 +1,58 @@
+[DEBUG]2019-03-05 11:38:53,261-==>  Preparing: select * from t_user where name=? 
+[DEBUG]2019-03-05 11:38:53,277-==> Parameters: eric(String)
+[DEBUG]2019-03-05 11:38:53,292-<==      Total: 1
+[DEBUG]2019-03-05 11:38:53,292-==>  Preparing: update shiro.t_user set password = ? where id=? 
+[DEBUG]2019-03-05 11:38:53,292-==> Parameters: ef83d5a0a7e52c2bab29db9d4026ae4f(String), 1(Integer)
+[DEBUG]2019-03-05 12:32:23,017-==>  Preparing: select * from t_user where name=? 
+[DEBUG]2019-03-05 12:32:23,048-==> Parameters: eric(String)
+[DEBUG]2019-03-05 12:32:23,048-<==      Total: 1
+[DEBUG]2019-03-25 11:06:15,504-==>  Preparing: select * from testadf where RID||RAST LIKE '%'||?||'%' 
+[DEBUG]2019-03-25 11:06:15,520-==> Parameters: 电脑(String)
+[DEBUG]2019-03-25 11:11:13,839-==>  Preparing: select * from testadf where RID||RAST LIKE '%'||?||'%' 
+[DEBUG]2019-03-25 11:11:13,854-==> Parameters: 电脑(String)
+[DEBUG]2019-03-25 11:13:17,949-==>  Preparing: select * from testadf where RID LIKE '%'||?||'%' 
+[DEBUG]2019-03-25 11:13:17,965-==> Parameters: 1(String)
+[DEBUG]2019-03-25 11:14:44,621-==>  Preparing: select * from testadf where RID = 1 
+[DEBUG]2019-03-25 11:14:44,637-==> Parameters: 
+[DEBUG]2019-03-25 11:14:44,902-<==      Total: 1
+[DEBUG]2019-03-25 11:15:13,062-==>  Preparing: select * from testadf where RID = 1 
+[DEBUG]2019-03-25 11:15:13,077-==> Parameters: 
+[DEBUG]2019-03-25 11:15:13,109-<==      Total: 1
+[DEBUG]2019-03-25 11:15:42,400-==>  Preparing: select * from testadf where RID = 1 
+[DEBUG]2019-03-25 11:15:42,400-==> Parameters: 
+[DEBUG]2019-03-25 11:15:42,432-<==      Total: 1
+[DEBUG]2019-03-25 11:18:00,793-==>  Preparing: select * from testadf where RID = 1 
+[DEBUG]2019-03-25 11:18:00,808-==> Parameters: 
+[DEBUG]2019-03-25 11:18:00,840-<==      Total: 1
+[DEBUG]2019-03-25 11:18:17,866-==>  Preparing: select * from testadf where RID = 1 
+[DEBUG]2019-03-25 11:18:17,881-==> Parameters: 
+[DEBUG]2019-03-25 11:18:17,912-<==      Total: 1
+[DEBUG]2019-03-25 14:40:29,446-==>  Preparing: select * from point where gid =1 
+[DEBUG]2019-03-25 14:40:29,462-==> Parameters: 
+[DEBUG]2019-03-25 14:40:29,477-<==      Total: 1
+[DEBUG]2019-03-25 16:25:21,690-==>  Preparing: select * from point where gid =1 
+[DEBUG]2019-03-25 16:25:21,706-==> Parameters: 
+[DEBUG]2019-03-25 16:25:21,721-<==      Total: 1
+[DEBUG]2019-03-25 16:27:54,253-==>  Preparing: SELECT * from (SELECT * from point where name like '%'|| '林' || '__') p WHERE name like '%'|| '山' || '%' 
+[DEBUG]2019-03-25 16:27:54,268-==> Parameters: 
+[DEBUG]2019-03-25 16:27:54,300-<==      Total: 39
+[DEBUG]2019-03-25 16:35:31,317-==>  Preparing: select * from point where name like '%'|| ? || '%' 
+[DEBUG]2019-03-25 16:35:31,333-==> Parameters: 山(String)
+[DEBUG]2019-03-25 16:35:31,426-<==      Total: 4974
+[DEBUG]2019-03-25 16:41:55,258-==>  Preparing: select * from testadf where rid = ? 
+[DEBUG]2019-03-25 16:41:55,274-==> Parameters: 1(String)
+[DEBUG]2019-03-25 16:44:08,391-==>  Preparing: select * from testadf where rid = ? 
+[DEBUG]2019-03-25 16:44:08,407-==> Parameters: 1(String)
+[DEBUG]2019-03-25 17:22:49,401-==>  Preparing: select * from testadf where rid = ? 
+[DEBUG]2019-03-25 17:22:49,417-==> Parameters: 1(String)
+[DEBUG]2019-03-25 17:25:21,380-==>  Preparing: select * from testadf where rid = ? 
+[DEBUG]2019-03-25 17:25:21,396-==> Parameters: 1(String)
+[DEBUG]2019-03-25 17:25:50,042-==>  Preparing: select * from point where name like '%'|| ? || '%' 
+[DEBUG]2019-03-25 17:25:50,057-==> Parameters: 山(String)
+[DEBUG]2019-03-25 17:25:50,151-<==      Total: 4974
+[DEBUG]2019-03-25 17:27:00,433-==>  Preparing: select * from testadf 
+[DEBUG]2019-03-25 17:27:00,448-==> Parameters: 
+[DEBUG]2019-03-25 17:27:00,480-<==      Total: 1
+[DEBUG]2019-03-25 17:27:52,556-==>  Preparing: select * from testadf where rid = ? 
+[DEBUG]2019-03-25 17:27:52,572-==> Parameters: 1(Integer)
+[DEBUG]2019-03-25 17:27:52,603-<==      Total: 1

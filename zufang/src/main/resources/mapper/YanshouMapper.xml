@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.YanshouMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.Yanshou" >
+    <id column="ysid" property="ysid" jdbcType="VARCHAR" />
+    <result column="yuname" property="yuname" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="yutel" property="yutel" jdbcType="VARCHAR" />
+    <result column="yhtitle" property="yhtitle" jdbcType="VARCHAR" />
+    <result column="houseid" property="houseid" jdbcType="VARCHAR" />
+    <result column="yhimg" property="yhimg" jdbcType="VARCHAR" />
+    <result column="ytime" property="ytime" jdbcType="VARCHAR" />
+    <result column="ystatus" property="ystatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ysid, yuname, userid, yutel, yhtitle, houseid, yhimg, ytime, ystatus
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from yanshou
+    where ysid = #{ysid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from yanshou
+    where ysid = #{ysid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.Yanshou" >
+    insert into yanshou (ysid, yuname, userid, 
+      yutel, yhtitle, houseid, 
+      yhimg, ytime, ystatus
+      )
+    values (#{ysid,jdbcType=VARCHAR}, #{yuname,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, 
+      #{yutel,jdbcType=VARCHAR}, #{yhtitle,jdbcType=VARCHAR}, #{houseid,jdbcType=VARCHAR}, 
+      #{yhimg,jdbcType=VARCHAR}, #{ytime,jdbcType=VARCHAR}, #{ystatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.Yanshou" >
+    insert into yanshou
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ysid != null" >
+        ysid,
+      </if>
+      <if test="yuname != null" >
+        yuname,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="yutel != null" >
+        yutel,
+      </if>
+      <if test="yhtitle != null" >
+        yhtitle,
+      </if>
+      <if test="houseid != null" >
+        houseid,
+      </if>
+      <if test="yhimg != null" >
+        yhimg,
+      </if>
+      <if test="ytime != null" >
+        ytime,
+      </if>
+      <if test="ystatus != null" >
+        ystatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ysid != null" >
+        #{ysid,jdbcType=VARCHAR},
+      </if>
+      <if test="yuname != null" >
+        #{yuname,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="yutel != null" >
+        #{yutel,jdbcType=VARCHAR},
+      </if>
+      <if test="yhtitle != null" >
+        #{yhtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="houseid != null" >
+        #{houseid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhimg != null" >
+        #{yhimg,jdbcType=VARCHAR},
+      </if>
+      <if test="ytime != null" >
+        #{ytime,jdbcType=VARCHAR},
+      </if>
+      <if test="ystatus != null" >
+        #{ystatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.Yanshou" >
+    update yanshou
+    <set >
+      <if test="yuname != null" >
+        yuname = #{yuname,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="yutel != null" >
+        yutel = #{yutel,jdbcType=VARCHAR},
+      </if>
+      <if test="yhtitle != null" >
+        yhtitle = #{yhtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="houseid != null" >
+        houseid = #{houseid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhimg != null" >
+        yhimg = #{yhimg,jdbcType=VARCHAR},
+      </if>
+      <if test="ytime != null" >
+        ytime = #{ytime,jdbcType=VARCHAR},
+      </if>
+      <if test="ystatus != null" >
+        ystatus = #{ystatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ysid = #{ysid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.Yanshou" >
+    update yanshou
+    set yuname = #{yuname,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      yutel = #{yutel,jdbcType=VARCHAR},
+      yhtitle = #{yhtitle,jdbcType=VARCHAR},
+      houseid = #{houseid,jdbcType=VARCHAR},
+      yhimg = #{yhimg,jdbcType=VARCHAR},
+      ytime = #{ytime,jdbcType=VARCHAR},
+      ystatus = #{ystatus,jdbcType=VARCHAR}
+    where ysid = #{ysid,jdbcType=VARCHAR}
+  </update>
+</mapper>

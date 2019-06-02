@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.UserinfoMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.Userinfo" >
+    <id column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="utel" property="utel" jdbcType="VARCHAR" />
+    <result column="upasswd" property="upasswd" jdbcType="VARCHAR" />
+    <result column="ucardid" property="ucardid" jdbcType="VARCHAR" />
+    <result column="ustatus" property="ustatus" jdbcType="VARCHAR" />
+    <result column="uimg1" property="uimg1" jdbcType="VARCHAR" />
+    <result column="uimg2" property="uimg2" jdbcType="VARCHAR" />
+    <result column="usex" property="usex" jdbcType="VARCHAR" />
+    <result column="uemail" property="uemail" jdbcType="VARCHAR" />
+    <result column="uztype" property="uztype" jdbcType="VARCHAR" />
+    <result column="udistrict" property="udistrict" jdbcType="VARCHAR" />
+    <result column="uaddress" property="uaddress" jdbcType="VARCHAR" />
+    <result column="umetro" property="umetro" jdbcType="VARCHAR" />
+    <result column="ustation" property="ustation" jdbcType="VARCHAR" />
+    <result column="uhtype" property="uhtype" jdbcType="VARCHAR" />
+    <result column="umianji" property="umianji" jdbcType="VARCHAR" />
+    <result column="ufeature" property="ufeature" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userid, uname, utel, upasswd, ucardid, ustatus, uimg1, uimg2, usex, uemail, uztype, 
+    udistrict, uaddress, umetro, ustation, uhtype, umianji, ufeature
+  </sql>
+
+  <select id="selectLogin" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select * from userinfo where userid = #{userid,jdbcType=VARCHAR} and upasswd = #{upasswd,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from userinfo
+    where userid = #{userid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from userinfo
+    where userid = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.Userinfo" >
+    insert into userinfo (userid, uname, utel, 
+      upasswd, ucardid, ustatus, 
+      uimg1, uimg2, usex, 
+      uemail, uztype, udistrict, 
+      uaddress, umetro, ustation, 
+      uhtype, umianji, ufeature
+      )
+    values (#{userid,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, #{utel,jdbcType=VARCHAR}, 
+      #{upasswd,jdbcType=VARCHAR}, #{ucardid,jdbcType=VARCHAR}, #{ustatus,jdbcType=VARCHAR}, 
+      #{uimg1,jdbcType=VARCHAR}, #{uimg2,jdbcType=VARCHAR}, #{usex,jdbcType=VARCHAR}, 
+      #{uemail,jdbcType=VARCHAR}, #{uztype,jdbcType=VARCHAR}, #{udistrict,jdbcType=VARCHAR}, 
+      #{uaddress,jdbcType=VARCHAR}, #{umetro,jdbcType=VARCHAR}, #{ustation,jdbcType=VARCHAR}, 
+      #{uhtype,jdbcType=VARCHAR}, #{umianji,jdbcType=VARCHAR}, #{ufeature,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.Userinfo" >
+    insert into userinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="utel != null" >
+        utel,
+      </if>
+      <if test="upasswd != null" >
+        upasswd,
+      </if>
+      <if test="ucardid != null" >
+        ucardid,
+      </if>
+      <if test="ustatus != null" >
+        ustatus,
+      </if>
+      <if test="uimg1 != null" >
+        uimg1,
+      </if>
+      <if test="uimg2 != null" >
+        uimg2,
+      </if>
+      <if test="usex != null" >
+        usex,
+      </if>
+      <if test="uemail != null" >
+        uemail,
+      </if>
+      <if test="uztype != null" >
+        uztype,
+      </if>
+      <if test="udistrict != null" >
+        udistrict,
+      </if>
+      <if test="uaddress != null" >
+        uaddress,
+      </if>
+      <if test="umetro != null" >
+        umetro,
+      </if>
+      <if test="ustation != null" >
+        ustation,
+      </if>
+      <if test="uhtype != null" >
+        uhtype,
+      </if>
+      <if test="umianji != null" >
+        umianji,
+      </if>
+      <if test="ufeature != null" >
+        ufeature,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="utel != null" >
+        #{utel,jdbcType=VARCHAR},
+      </if>
+      <if test="upasswd != null" >
+        #{upasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="ucardid != null" >
+        #{ucardid,jdbcType=VARCHAR},
+      </if>
+      <if test="ustatus != null" >
+        #{ustatus,jdbcType=VARCHAR},
+      </if>
+      <if test="uimg1 != null" >
+        #{uimg1,jdbcType=VARCHAR},
+      </if>
+      <if test="uimg2 != null" >
+        #{uimg2,jdbcType=VARCHAR},
+      </if>
+      <if test="usex != null" >
+        #{usex,jdbcType=VARCHAR},
+      </if>
+      <if test="uemail != null" >
+        #{uemail,jdbcType=VARCHAR},
+      </if>
+      <if test="uztype != null" >
+        #{uztype,jdbcType=VARCHAR},
+      </if>
+      <if test="udistrict != null" >
+        #{udistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="uaddress != null" >
+        #{uaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="umetro != null" >
+        #{umetro,jdbcType=VARCHAR},
+      </if>
+      <if test="ustation != null" >
+        #{ustation,jdbcType=VARCHAR},
+      </if>
+      <if test="uhtype != null" >
+        #{uhtype,jdbcType=VARCHAR},
+      </if>
+      <if test="umianji != null" >
+        #{umianji,jdbcType=VARCHAR},
+      </if>
+      <if test="ufeature != null" >
+        #{ufeature,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.Userinfo" >
+    update userinfo
+    <set >
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="utel != null" >
+        utel = #{utel,jdbcType=VARCHAR},
+      </if>
+      <if test="upasswd != null" >
+        upasswd = #{upasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="ucardid != null" >
+        ucardid = #{ucardid,jdbcType=VARCHAR},
+      </if>
+      <if test="ustatus != null" >
+        ustatus = #{ustatus,jdbcType=VARCHAR},
+      </if>
+      <if test="uimg1 != null" >
+        uimg1 = #{uimg1,jdbcType=VARCHAR},
+      </if>
+      <if test="uimg2 != null" >
+        uimg2 = #{uimg2,jdbcType=VARCHAR},
+      </if>
+      <if test="usex != null" >
+        usex = #{usex,jdbcType=VARCHAR},
+      </if>
+      <if test="uemail != null" >
+        uemail = #{uemail,jdbcType=VARCHAR},
+      </if>
+      <if test="uztype != null" >
+        uztype = #{uztype,jdbcType=VARCHAR},
+      </if>
+      <if test="udistrict != null" >
+        udistrict = #{udistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="uaddress != null" >
+        uaddress = #{uaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="umetro != null" >
+        umetro = #{umetro,jdbcType=VARCHAR},
+      </if>
+      <if test="ustation != null" >
+        ustation = #{ustation,jdbcType=VARCHAR},
+      </if>
+      <if test="uhtype != null" >
+        uhtype = #{uhtype,jdbcType=VARCHAR},
+      </if>
+      <if test="umianji != null" >
+        umianji = #{umianji,jdbcType=VARCHAR},
+      </if>
+      <if test="ufeature != null" >
+        ufeature = #{ufeature,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.Userinfo" >
+    update userinfo
+    set uname = #{uname,jdbcType=VARCHAR},
+      utel = #{utel,jdbcType=VARCHAR},
+      upasswd = #{upasswd,jdbcType=VARCHAR},
+      ucardid = #{ucardid,jdbcType=VARCHAR},
+      ustatus = #{ustatus,jdbcType=VARCHAR},
+      uimg1 = #{uimg1,jdbcType=VARCHAR},
+      uimg2 = #{uimg2,jdbcType=VARCHAR},
+      usex = #{usex,jdbcType=VARCHAR},
+      uemail = #{uemail,jdbcType=VARCHAR},
+      uztype = #{uztype,jdbcType=VARCHAR},
+      udistrict = #{udistrict,jdbcType=VARCHAR},
+      uaddress = #{uaddress,jdbcType=VARCHAR},
+      umetro = #{umetro,jdbcType=VARCHAR},
+      ustation = #{ustation,jdbcType=VARCHAR},
+      uhtype = #{uhtype,jdbcType=VARCHAR},
+      umianji = #{umianji,jdbcType=VARCHAR},
+      ufeature = #{ufeature,jdbcType=VARCHAR}
+    where userid = #{userid,jdbcType=VARCHAR}
+  </update>
+</mapper>

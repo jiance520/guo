@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>title</title>
+    <meta charset="UTF-8">
+    <!--vue引用的css、js文件-->
+    <link rel="stylesheet" type="text/css" href="v3.20.1-dist/ol.css"/>
+    <script type="text/javascript" src="vue/vue.js"></script>
+    <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="v3.20.1-dist/ol.js"></script>
+    <style type="text/css">
+        * {
+            margin: 0 auto;
+            padding: 0;
+            font-size: 20px;
+            border: 2px solid #444;
+        }
+    </style>
+</head>
+<body>
+<div id="map" class="map">11</div>
+<script type="text/javascript">
+    $(document).ready(()=> {
+        let map = new ol.Ma({
+            target:'map',
+            layers:[
+                new ol.layer.Tile({
+                    source:new ol.source.TileWMS({
+                        url:'http://localhost:8080/geoserver/geodb/wms'
+                    })
+                })
+            ],
+            view:new View({
+                center:ol.proj.fromLonLat([0.0]),
+                zoom:2
+            })
+        });
+    })
+</script>
+</body>
+</html>

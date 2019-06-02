@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.YuyueMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.Yuyue" >
+    <id column="yyid" property="yyid" jdbcType="VARCHAR" />
+    <result column="yuname" property="yuname" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="yhtitle" property="yhtitle" jdbcType="VARCHAR" />
+    <result column="houseid" property="houseid" jdbcType="VARCHAR" />
+    <result column="yhimg" property="yhimg" jdbcType="VARCHAR" />
+    <result column="mname" property="mname" jdbcType="VARCHAR" />
+    <result column="masterid" property="masterid" jdbcType="VARCHAR" />
+    <result column="yttime" property="yttime" jdbcType="VARCHAR" />
+    <result column="yktime" property="yktime" jdbcType="VARCHAR" />
+    <result column="ystatus" property="ystatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    yyid, yuname, userid, yhtitle, houseid, yhimg, mname, masterid, yttime, yktime, ystatus
+  </sql>
+
+  <select id="selectYuyueList" resultType="java.util.Map" parameterType="java.util.Map">
+    select * from yuyue
+    <where>
+      <if test="yyid!=null and yyid!=''">
+        yyid = #{yyid}
+      </if>
+      <if test="yuname!=null and yuname!=''">
+        and yuname = #{yuname}
+      </if>
+      <if test="userid!=null and userid!=''">
+        and userid = #{userid}
+      </if>
+      <if test="yhtitle!=null and yhtitle!=''">
+        and yhtitle = #{yhtitle}
+      </if>
+      <if test="houseid!=null and houseid!=''">
+        and houseid = #{houseid}
+      </if>
+      <if test="yhimg!=null and yhimg!=''">
+        and yhimg = #{yhimg}
+      </if>
+      <if test="mname!=null and mname!=''">
+        and mname = #{mname}
+      </if>
+      <if test="masterid!=null and masterid!=''">
+        and masterid = #{masterid}
+      </if>
+      <if test="yttime!=null and yttime!=''">
+        and yttime = #{yttime}
+      </if>
+      <if test="yktime!=null and yktime!=''">
+        and yktime = #{yktime}
+      </if>
+      <if test="ystatus!=null and ystatus!=''">
+        and ystatus = #{ystatus}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from yuyue
+    where yyid = #{yyid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from yuyue
+    where yyid = #{yyid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.Yuyue" >
+    insert into yuyue (yyid, yuname, userid, 
+      yhtitle, houseid, yhimg, 
+      mname, masterid, yttime, 
+      yktime, ystatus)
+    values (#{yyid,jdbcType=VARCHAR}, #{yuname,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, 
+      #{yhtitle,jdbcType=VARCHAR}, #{houseid,jdbcType=VARCHAR}, #{yhimg,jdbcType=VARCHAR}, 
+      #{mname,jdbcType=VARCHAR}, #{masterid,jdbcType=VARCHAR}, #{yttime,jdbcType=VARCHAR}, 
+      #{yktime,jdbcType=VARCHAR}, #{ystatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.Yuyue" >
+    insert into yuyue
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="yyid != null" >
+        yyid,
+      </if>
+      <if test="yuname != null" >
+        yuname,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="yhtitle != null" >
+        yhtitle,
+      </if>
+      <if test="houseid != null" >
+        houseid,
+      </if>
+      <if test="yhimg != null" >
+        yhimg,
+      </if>
+      <if test="mname != null" >
+        mname,
+      </if>
+      <if test="masterid != null" >
+        masterid,
+      </if>
+      <if test="yttime != null" >
+        yttime,
+      </if>
+      <if test="yktime != null" >
+        yktime,
+      </if>
+      <if test="ystatus != null" >
+        ystatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="yyid != null" >
+        #{yyid,jdbcType=VARCHAR},
+      </if>
+      <if test="yuname != null" >
+        #{yuname,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhtitle != null" >
+        #{yhtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="houseid != null" >
+        #{houseid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhimg != null" >
+        #{yhimg,jdbcType=VARCHAR},
+      </if>
+      <if test="mname != null" >
+        #{mname,jdbcType=VARCHAR},
+      </if>
+      <if test="masterid != null" >
+        #{masterid,jdbcType=VARCHAR},
+      </if>
+      <if test="yttime != null" >
+        #{yttime,jdbcType=VARCHAR},
+      </if>
+      <if test="yktime != null" >
+        #{yktime,jdbcType=VARCHAR},
+      </if>
+      <if test="ystatus != null" >
+        #{ystatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.Yuyue" >
+    update yuyue
+    <set >
+      <if test="yuname != null" >
+        yuname = #{yuname,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhtitle != null" >
+        yhtitle = #{yhtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="houseid != null" >
+        houseid = #{houseid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhimg != null" >
+        yhimg = #{yhimg,jdbcType=VARCHAR},
+      </if>
+      <if test="mname != null" >
+        mname = #{mname,jdbcType=VARCHAR},
+      </if>
+      <if test="masterid != null" >
+        masterid = #{masterid,jdbcType=VARCHAR},
+      </if>
+      <if test="yttime != null" >
+        yttime = #{yttime,jdbcType=VARCHAR},
+      </if>
+      <if test="yktime != null" >
+        yktime = #{yktime,jdbcType=VARCHAR},
+      </if>
+      <if test="ystatus != null" >
+        ystatus = #{ystatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where yyid = #{yyid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.Yuyue" >
+    update yuyue
+    set yuname = #{yuname,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      yhtitle = #{yhtitle,jdbcType=VARCHAR},
+      houseid = #{houseid,jdbcType=VARCHAR},
+      yhimg = #{yhimg,jdbcType=VARCHAR},
+      mname = #{mname,jdbcType=VARCHAR},
+      masterid = #{masterid,jdbcType=VARCHAR},
+      yttime = #{yttime,jdbcType=VARCHAR},
+      yktime = #{yktime,jdbcType=VARCHAR},
+      ystatus = #{ystatus,jdbcType=VARCHAR}
+    where yyid = #{yyid,jdbcType=VARCHAR}
+  </update>
+</mapper>

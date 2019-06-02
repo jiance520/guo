@@ -1,0 +1,16 @@
+spring:
+mvc:
+static-path-pattern: /**
+resources:
+static-locations: classpath:/static/
+thymeleaf:
+prefix: classpath:/templates/
+suffix: .html
+cache: false #关闭缓存
+#logging:
+# pattern:
+#  console: "%d - %msg%n"
+# path: D:\workspace\idea\guo\zufang\src\main\resources
+# file: demo.log
+# level:
+#  com.imooc.LoggerTest: trace

@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="guo.dao.TesttypeMapper">
+  <resultMap id="BaseResultMap" type="guo.entity.Testtype">
+    <id column="bigint1" jdbcType="BIGINT" property="bigint1" />
+    <result column="integer1" jdbcType="INTEGER" property="integer1" />
+    <result column="tint1" jdbcType="INTEGER" property="tint1" />
+    <result column="mediumint1" jdbcType="INTEGER" property="mediumint1" />
+    <result column="smallint1" jdbcType="SMALLINT" property="smallint1" />
+    <result column="tinyint1" jdbcType="TINYINT" property="tinyint1" />
+    <result column="numeric1" jdbcType="DECIMAL" property="numeric1" />
+    <result column="decimal1" jdbcType="DECIMAL" property="decimal1" />
+    <result column="double1" jdbcType="DOUBLE" property="double1" />
+    <result column="real1" jdbcType="DOUBLE" property="real1" />
+    <result column="float1" jdbcType="REAL" property="float1" />
+    <result column="timestamp1" jdbcType="TIMESTAMP" property="timestamp1" />
+    <result column="datetime1" jdbcType="TIMESTAMP" property="datetime1" />
+    <result column="year1" jdbcType="VARCHAR" property="year1" />
+    <result column="date1" jdbcType="DATE" property="date1" />
+    <result column="time1" jdbcType="TIME" property="time1" />
+    <result column="varchar1" jdbcType="VARCHAR" property="varchar1" />
+    <result column="char1" jdbcType="CHAR" property="char1" />
+    <result column="bit1" jdbcType="BIT" property="bit1" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="guo.entity.Testtype">
+    <result column="longtext1" jdbcType="LONGVARCHAR" property="longtext1" />
+    <result column="mediumtext1" jdbcType="LONGVARCHAR" property="mediumtext1" />
+    <result column="text1" jdbcType="LONGVARCHAR" property="text1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    bigint1, integer1, tint1, mediumint1, smallint1, tinyint1, numeric1, decimal1, double1, 
+    real1, float1, timestamp1, datetime1, year1, date1, time1, varchar1, char1, bit1
+  </sql>
+  <sql id="Blob_Column_List">
+    longtext1, mediumtext1, text1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from testtype
+    where bigint1 = #{bigint1,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from testtype
+    where bigint1 = #{bigint1,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.Testtype">
+    insert into testtype (bigint1, integer1, tint1, 
+      mediumint1, smallint1, tinyint1, 
+      numeric1, decimal1, double1, 
+      real1, float1, timestamp1, 
+      datetime1, year1, date1, 
+      time1, varchar1, char1, bit1, 
+      longtext1, mediumtext1, text1
+      )
+    values (#{bigint1,jdbcType=BIGINT}, #{integer1,jdbcType=INTEGER}, #{tint1,jdbcType=INTEGER}, 
+      #{mediumint1,jdbcType=INTEGER}, #{smallint1,jdbcType=SMALLINT}, #{tinyint1,jdbcType=TINYINT}, 
+      #{numeric1,jdbcType=DECIMAL}, #{decimal1,jdbcType=DECIMAL}, #{double1,jdbcType=DOUBLE}, 
+      #{real1,jdbcType=DOUBLE}, #{float1,jdbcType=REAL}, #{timestamp1,jdbcType=TIMESTAMP}, 
+      #{datetime1,jdbcType=TIMESTAMP}, #{year1,jdbcType=VARCHAR}, #{date1,jdbcType=DATE}, 
+      #{time1,jdbcType=TIME}, #{varchar1,jdbcType=VARCHAR}, #{char1,jdbcType=CHAR}, #{bit1,jdbcType=BIT}, 
+      #{longtext1,jdbcType=LONGVARCHAR}, #{mediumtext1,jdbcType=LONGVARCHAR}, #{text1,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.Testtype">
+    insert into testtype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bigint1 != null">
+        bigint1,
+      </if>
+      <if test="integer1 != null">
+        integer1,
+      </if>
+      <if test="tint1 != null">
+        tint1,
+      </if>
+      <if test="mediumint1 != null">
+        mediumint1,
+      </if>
+      <if test="smallint1 != null">
+        smallint1,
+      </if>
+      <if test="tinyint1 != null">
+        tinyint1,
+      </if>
+      <if test="numeric1 != null">
+        numeric1,
+      </if>
+      <if test="decimal1 != null">
+        decimal1,
+      </if>
+      <if test="double1 != null">
+        double1,
+      </if>
+      <if test="real1 != null">
+        real1,
+      </if>
+      <if test="float1 != null">
+        float1,
+      </if>
+      <if test="timestamp1 != null">
+        timestamp1,
+      </if>
+      <if test="datetime1 != null">
+        datetime1,
+      </if>
+      <if test="year1 != null">
+        year1,
+      </if>
+      <if test="date1 != null">
+        date1,
+      </if>
+      <if test="time1 != null">
+        time1,
+      </if>
+      <if test="varchar1 != null">
+        varchar1,
+      </if>
+      <if test="char1 != null">
+        char1,
+      </if>
+      <if test="bit1 != null">
+        bit1,
+      </if>
+      <if test="longtext1 != null">
+        longtext1,
+      </if>
+      <if test="mediumtext1 != null">
+        mediumtext1,
+      </if>
+      <if test="text1 != null">
+        text1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bigint1 != null">
+        #{bigint1,jdbcType=BIGINT},
+      </if>
+      <if test="integer1 != null">
+        #{integer1,jdbcType=INTEGER},
+      </if>
+      <if test="tint1 != null">
+        #{tint1,jdbcType=INTEGER},
+      </if>
+      <if test="mediumint1 != null">
+        #{mediumint1,jdbcType=INTEGER},
+      </if>
+      <if test="smallint1 != null">
+        #{smallint1,jdbcType=SMALLINT},
+      </if>
+      <if test="tinyint1 != null">
+        #{tinyint1,jdbcType=TINYINT},
+      </if>
+      <if test="numeric1 != null">
+        #{numeric1,jdbcType=DECIMAL},
+      </if>
+      <if test="decimal1 != null">
+        #{decimal1,jdbcType=DECIMAL},
+      </if>
+      <if test="double1 != null">
+        #{double1,jdbcType=DOUBLE},
+      </if>
+      <if test="real1 != null">
+        #{real1,jdbcType=DOUBLE},
+      </if>
+      <if test="float1 != null">
+        #{float1,jdbcType=REAL},
+      </if>
+      <if test="timestamp1 != null">
+        #{timestamp1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datetime1 != null">
+        #{datetime1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="year1 != null">
+        #{year1,jdbcType=VARCHAR},
+      </if>
+      <if test="date1 != null">
+        #{date1,jdbcType=DATE},
+      </if>
+      <if test="time1 != null">
+        #{time1,jdbcType=TIME},
+      </if>
+      <if test="varchar1 != null">
+        #{varchar1,jdbcType=VARCHAR},
+      </if>
+      <if test="char1 != null">
+        #{char1,jdbcType=CHAR},
+      </if>
+      <if test="bit1 != null">
+        #{bit1,jdbcType=BIT},
+      </if>
+      <if test="longtext1 != null">
+        #{longtext1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mediumtext1 != null">
+        #{mediumtext1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="text1 != null">
+        #{text1,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.Testtype">
+    update testtype
+    <set>
+      <if test="integer1 != null">
+        integer1 = #{integer1,jdbcType=INTEGER},
+      </if>
+      <if test="tint1 != null">
+        tint1 = #{tint1,jdbcType=INTEGER},
+      </if>
+      <if test="mediumint1 != null">
+        mediumint1 = #{mediumint1,jdbcType=INTEGER},
+      </if>
+      <if test="smallint1 != null">
+        smallint1 = #{smallint1,jdbcType=SMALLINT},
+      </if>
+      <if test="tinyint1 != null">
+        tinyint1 = #{tinyint1,jdbcType=TINYINT},
+      </if>
+      <if test="numeric1 != null">
+        numeric1 = #{numeric1,jdbcType=DECIMAL},
+      </if>
+      <if test="decimal1 != null">
+        decimal1 = #{decimal1,jdbcType=DECIMAL},
+      </if>
+      <if test="double1 != null">
+        double1 = #{double1,jdbcType=DOUBLE},
+      </if>
+      <if test="real1 != null">
+        real1 = #{real1,jdbcType=DOUBLE},
+      </if>
+      <if test="float1 != null">
+        float1 = #{float1,jdbcType=REAL},
+      </if>
+      <if test="timestamp1 != null">
+        timestamp1 = #{timestamp1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datetime1 != null">
+        datetime1 = #{datetime1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="year1 != null">
+        year1 = #{year1,jdbcType=VARCHAR},
+      </if>
+      <if test="date1 != null">
+        date1 = #{date1,jdbcType=DATE},
+      </if>
+      <if test="time1 != null">
+        time1 = #{time1,jdbcType=TIME},
+      </if>
+      <if test="varchar1 != null">
+        varchar1 = #{varchar1,jdbcType=VARCHAR},
+      </if>
+      <if test="char1 != null">
+        char1 = #{char1,jdbcType=CHAR},
+      </if>
+      <if test="bit1 != null">
+        bit1 = #{bit1,jdbcType=BIT},
+      </if>
+      <if test="longtext1 != null">
+        longtext1 = #{longtext1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mediumtext1 != null">
+        mediumtext1 = #{mediumtext1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="text1 != null">
+        text1 = #{text1,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where bigint1 = #{bigint1,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="guo.entity.Testtype">
+    update testtype
+    set integer1 = #{integer1,jdbcType=INTEGER},
+      tint1 = #{tint1,jdbcType=INTEGER},
+      mediumint1 = #{mediumint1,jdbcType=INTEGER},
+      smallint1 = #{smallint1,jdbcType=SMALLINT},
+      tinyint1 = #{tinyint1,jdbcType=TINYINT},
+      numeric1 = #{numeric1,jdbcType=DECIMAL},
+      decimal1 = #{decimal1,jdbcType=DECIMAL},
+      double1 = #{double1,jdbcType=DOUBLE},
+      real1 = #{real1,jdbcType=DOUBLE},
+      float1 = #{float1,jdbcType=REAL},
+      timestamp1 = #{timestamp1,jdbcType=TIMESTAMP},
+      datetime1 = #{datetime1,jdbcType=TIMESTAMP},
+      year1 = #{year1,jdbcType=VARCHAR},
+      date1 = #{date1,jdbcType=DATE},
+      time1 = #{time1,jdbcType=TIME},
+      varchar1 = #{varchar1,jdbcType=VARCHAR},
+      char1 = #{char1,jdbcType=CHAR},
+      bit1 = #{bit1,jdbcType=BIT},
+      longtext1 = #{longtext1,jdbcType=LONGVARCHAR},
+      mediumtext1 = #{mediumtext1,jdbcType=LONGVARCHAR},
+      text1 = #{text1,jdbcType=LONGVARCHAR}
+    where bigint1 = #{bigint1,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.Testtype">
+    update testtype
+    set integer1 = #{integer1,jdbcType=INTEGER},
+      tint1 = #{tint1,jdbcType=INTEGER},
+      mediumint1 = #{mediumint1,jdbcType=INTEGER},
+      smallint1 = #{smallint1,jdbcType=SMALLINT},
+      tinyint1 = #{tinyint1,jdbcType=TINYINT},
+      numeric1 = #{numeric1,jdbcType=DECIMAL},
+      decimal1 = #{decimal1,jdbcType=DECIMAL},
+      double1 = #{double1,jdbcType=DOUBLE},
+      real1 = #{real1,jdbcType=DOUBLE},
+      float1 = #{float1,jdbcType=REAL},
+      timestamp1 = #{timestamp1,jdbcType=TIMESTAMP},
+      datetime1 = #{datetime1,jdbcType=TIMESTAMP},
+      year1 = #{year1,jdbcType=VARCHAR},
+      date1 = #{date1,jdbcType=DATE},
+      time1 = #{time1,jdbcType=TIME},
+      varchar1 = #{varchar1,jdbcType=VARCHAR},
+      char1 = #{char1,jdbcType=CHAR},
+      bit1 = #{bit1,jdbcType=BIT}
+    where bigint1 = #{bigint1,jdbcType=BIGINT}
+  </update>
+
+
+</mapper>
