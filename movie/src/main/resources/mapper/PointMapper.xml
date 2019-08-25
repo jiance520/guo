@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.PointMapper" >
-  <resultMap id="BaseResultMap" type="com.entity.Point" >
+<mapper namespace="com.guo.dao.PointMapper" >
+  <resultMap id="BaseResultMap" type="com.guo.entity.Point" >
     <id column="gid" property="gid" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="kind" property="kind" jdbcType="VARCHAR" />
@@ -28,13 +28,13 @@
     delete from point
     where gid = #{gid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.entity.Point" >
+  <insert id="insert" parameterType="com.guo.entity.Point" >
     insert into point (gid, name, kind, 
       geom)
     values (#{gid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{kind,jdbcType=VARCHAR}, 
       #{geom,jdbcType=OTHER})
   </insert>
-  <insert id="insertSelective" parameterType="com.entity.Point" >
+  <insert id="insertSelective" parameterType="com.guo.entity.Point" >
     insert into point
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="gid != null" >
@@ -65,7 +65,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Point" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.guo.entity.Point" >
     update point
     <set >
       <if test="name != null" >
@@ -80,7 +80,7 @@
     </set>
     where gid = #{gid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.entity.Point" >
+  <update id="updateByPrimaryKey" parameterType="com.guo.entity.Point" >
     update point
     set name = #{name,jdbcType=VARCHAR},
       kind = #{kind,jdbcType=VARCHAR},

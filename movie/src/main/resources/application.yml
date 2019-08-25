@@ -1,5 +1,3 @@
-#application.yml我的配置如下：
-
 spring:
 mvc:
 static-path-pattern: /**
@@ -9,3 +7,10 @@ thymeleaf:
 prefix: classpath:/templates/
 suffix: .html
 cache: false #关闭缓存
+#logging:
+# pattern:
+#  console: "%d - %msg%n"
+# path: D:\workspace\idea\guo\zufang\src\main\resources
+# file: demo.log
+# level:
+#  com.imooc.LoggerTest: trace

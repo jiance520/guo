@@ -151,6 +151,33 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-redis</artifactId>
     </dependency>
+    <!--    AOP代理，通知    -->
+<!--    <dependency>-->
+<!--      <groupId>org.springframework</groupId>-->
+<!--      <artifactId>spring-aop</artifactId>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.springframework.boot</groupId>-->
+<!--      <artifactId>spring-boot-starter-aop</artifactId>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.aspectj</groupId>-->
+<!--      <artifactId>aspectjrt</artifactId>-->
+<!--      <version>1.8.9</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.aspectj</groupId>-->
+<!--      <artifactId>aspectjweaver</artifactId>-->
+<!--      <version>1.9.2</version>-->
+<!--    </dependency>-->
+    <!--cglib包是用来动态代理用的，基于类的代理，aspecrjrt和aspectjweaver是与aspectj相关的包，用来支持切面编程-->
+    <!--aspectjrt包是aspectj的runtime包-->
+    <!--aspectjweaver是aspectj的织入包。-->
+<!--    <dependency>-->
+<!--      <groupId>cglib</groupId>-->
+<!--      <artifactId>cglib</artifactId>-->
+<!--      <version>2.1</version>-->
+<!--    </dependency>-->
   </dependencies>
 
   <build>

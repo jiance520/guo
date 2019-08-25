@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="guo.dao.YanshouMapper" >
-  <resultMap id="BaseResultMap" type="guo.entity.Yanshou" >
+<mapper namespace="guo.com.dao.YanshouMapper" >
+  <resultMap id="BaseResultMap" type="guo.com.entity.Yanshou" >
     <id column="ysid" property="ysid" jdbcType="VARCHAR" />
     <result column="yuname" property="yuname" jdbcType="VARCHAR" />
     <result column="userid" property="userid" jdbcType="VARCHAR" />
@@ -25,7 +25,7 @@
     delete from yanshou
     where ysid = #{ysid,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="guo.entity.Yanshou" >
+  <insert id="insert" parameterType="guo.com.entity.Yanshou" >
     insert into yanshou (ysid, yuname, userid, 
       yutel, yhtitle, houseid, 
       yhimg, ytime, ystatus
@@ -35,7 +35,7 @@
       #{yhimg,jdbcType=VARCHAR}, #{ytime,jdbcType=VARCHAR}, #{ystatus,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="guo.entity.Yanshou" >
+  <insert id="insertSelective" parameterType="guo.com.entity.Yanshou" >
     insert into yanshou
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="ysid != null" >
@@ -96,7 +96,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.Yanshou" >
+  <update id="updateByPrimaryKeySelective" parameterType="guo.com.entity.Yanshou" >
     update yanshou
     <set >
       <if test="yuname != null" >
@@ -126,7 +126,7 @@
     </set>
     where ysid = #{ysid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="guo.entity.Yanshou" >
+  <update id="updateByPrimaryKey" parameterType="guo.com.entity.Yanshou" >
     update yanshou
     set yuname = #{yuname,jdbcType=VARCHAR},
       userid = #{userid,jdbcType=VARCHAR},

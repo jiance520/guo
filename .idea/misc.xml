@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/milmajordb2012127" />
     <file type="web" url="file://$PROJECT_DIR$/movie" />
     <file type="web" url="file://$PROJECT_DIR$/test" />
     <file type="web" url="file://$PROJECT_DIR$/ttt" />
+    <file type="web" url="file://$PROJECT_DIR$/weapon" />
     <file type="web" url="file://$PROJECT_DIR$/zufang" />
   </component>
   <component name="JavaScriptSettings">
@@ -16,6 +18,7 @@
         <option value="$PROJECT_DIR$/movie/pom.xml" />
         <option value="$PROJECT_DIR$/moduleParent/pom.xml" />
         <option value="$PROJECT_DIR$/zufang/pom.xml" />
+        <option value="$PROJECT_DIR$/milmajordb2012127/pom.xml" />
       </list>
     </option>
   </component>

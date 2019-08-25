@@ -1,9 +1,6 @@
 package guo.utils;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.net.URL;
@@ -17,7 +14,7 @@ import java.util.regex.Pattern;
 //@Component
 //@Configuration构造函数的入参，必须用存在的属性？
 //@PropertySource("classpath:/application.properties")自定义配置文件
-public class OneUpdate{
+public class OneUpdate {
     private String jarName = "";//mysql-connector-java-5.1.20.jar
     private String propertiesName="";//application.properties
     private String resourcesPath="";//D:\workspace\idea\guo\zufang\src\main\resources
@@ -37,7 +34,7 @@ public class OneUpdate{
     @Value("${spring.datasource.password}")
     private String password="";//root
     @Value("${server.servlet.context-path}")
-    private String projectName = "";//zufang
+    private String projectName = "";//zufang,工程名不一定是数据库名，所以generator.xml要检查。
     private String generatorPath = "";//D:\workspace\idea\guo\zufang\src\main\resources\mybatisGenerator\
     private String jarMybatis = "mybatis-generator-core-1.3.2.jar";
     private boolean flagDel = false;//重构是否删除原来的dao、entity、mapper.xml。false不删除
@@ -58,7 +55,7 @@ public class OneUpdate{
     //private String daoPackageName = comName+"."+daoFolderName;//guo.dao;
     //private String iServicePackageName = comName+"."+iServiceFolderName;;//guo.service
     //private String servicePackageName = comName+"."+serviceFolderName;//guo.service.impl
-    public OneUpdate(String propertiesName,String jarName,String daoFolderName,String daoLastName,String iServiceFolderName,String serviceFolderName,boolean flagDel,Object... tableNames){
+    public OneUpdate(String propertiesName, String jarName, String daoFolderName, String daoLastName, String iServiceFolderName, String serviceFolderName, boolean flagDel, Object... tableNames){
         if(this.propertiesName==null||"".equals(this.propertiesName)){
             this.propertiesName=propertiesName;
         }
@@ -125,7 +122,7 @@ public class OneUpdate{
             System.out.println("-----daoPath:"+this.daoPath);
         }
         if(this.projectName==null||"".equals(this.projectName)){
-            this.projectName=StringIndex.substringLastIndexOf(this.daoPath,"/",5,6);
+            this.projectName=StringIndex.substringLastIndexOf(this.daoPath,"/",6,7);
             //this.projectName=properties.getProperty("server.servlet.context-path");
         }
         if(this.comName==null||"".equals(this.comName)){
@@ -195,7 +192,7 @@ public class OneUpdate{
         }
         if(this.cmd==null||"".equals(this.cmd)){
             this.cmd = "cmd /c start "+generatorPath+"run.bat";
-            //this.cmd = "cmd /c start "+generatorPath+"run.bat";//c表示执行命令后关闭窗口，关闭无效，使用exit加在了run.bat后
+            //this.cmd = "cmd /c start "+generatorPath+"run.bat";//c表示执行命令后关闭窗口，关闭无效，使用exit加在了run.bat后,或者直接在bat文件里手动添加一个exit。
             //命令可直接执行，也可以放在bat批量文件处理。
             //只打开文件exec("start .//a.doc");
         }
@@ -348,9 +345,9 @@ public class OneUpdate{
             generatorXmlStr = generatorXmlStr.replaceAll("location=\"[\\u4e00-\\u9fa5\\w\\.-:-/\\\\]+\\.jar\"","location=\""+jarLocation+"\"");
             generatorXmlStr = generatorXmlStr.replaceAll("driverClass=\"[\\w\\.]+Driver","driverClass=\""+driverClass);
             generatorXmlStr = generatorXmlStr.replaceAll("connectionURL=\"[\\w\\.-_:=/\\\\]+\" userId","connectionURL=\""+connectionURL+"\" userId");
-            generatorXmlStr = generatorXmlStr.replaceAll("<javaModelGenerator[\\s]+targetPackage=\"[\\w\\.]+\"[\\s]+targetProject=\"[\\u4e00-\\u9fa5\\w\\.-_:/\\\\]+\">","<javaModelGenerator targetPackage=\""+javaModelGenerator+"\" targetProject=\""+javaTargetProject+"\">");
-            generatorXmlStr = generatorXmlStr.replaceAll("<sqlMapGenerator[\\s]+targetPackage=\"[\\w\\.]+\"[\\s]+targetProject=\"[\\u4e00-\\u9fa5\\w\\.-_:/\\\\]+\">","<sqlMapGenerator targetPackage=\""+sqlMapGenerator+"\" targetProject=\""+sqlTargetProject+"\">");
-            generatorXmlStr = generatorXmlStr.replaceAll("<javaClientGenerator[\\s]+targetPackage=\"[\\w\\.]+\"[\\s]+targetProject=\"[\\u4e00-\\u9fa5\\w\\.-_:/\\\\]+\" type=\"XMLMAPPER\">","<javaClientGenerator targetPackage=\""+clientGenerator+"\" targetProject=\""+clientTargetProject+"\" type=\"XMLMAPPER\">");
+            generatorXmlStr = generatorXmlStr.replaceAll("<javaModelGenerator[\\s]+targetPackage=\"[\\w\\./]*+\"[\\s]+targetProject=\"[\\u4e00-\\u9fa5\\w\\.-_:/\\\\]+\">","<javaModelGenerator targetPackage=\""+javaModelGenerator+"\" targetProject=\""+javaTargetProject+"\">");
+            generatorXmlStr = generatorXmlStr.replaceAll("<sqlMapGenerator[\\s]+targetPackage=\"[\\w\\./]*+\"[\\s]+targetProject=\"[\\u4e00-\\u9fa5\\w\\.-_:/\\\\]+\">","<sqlMapGenerator targetPackage=\""+sqlMapGenerator+"\" targetProject=\""+sqlTargetProject+"\">");
+            generatorXmlStr = generatorXmlStr.replaceAll("<javaClientGenerator[\\s]+targetPackage=\"[\\w\\./]*+\"[\\s]+targetProject=\"[\\u4e00-\\u9fa5\\w\\.-_:/\\\\]+\" type=\"XMLMAPPER\">","<javaClientGenerator targetPackage=\""+clientGenerator+"\" targetProject=\""+clientTargetProject+"\" type=\"XMLMAPPER\">");
             generatorXmlStr = generatorXmlStr.replaceAll("<table[\\s\\w=\">]+</table>","");
             generatorXmlStr = generatorXmlStr.replaceAll("javaClientGenerator>\\s+","javaClientGenerator>\n"+stringBuffer.toString()+"\n");
             //System.out.println("-----generatorXmlStr:"+generatorXmlStr);
@@ -374,7 +371,7 @@ public class OneUpdate{
                 unicode2=bufferedReader.read();
             }
             String runBatStr = stringBufferRun.toString();
-            runBatStr = runBatStr.replaceAll("java.*-overwrite","java -jar "+generatorPath+jarMybatis+" -configfile "+generatorPath+"generator.xml -overwrite\nexit");
+            runBatStr = runBatStr.replaceAll("java[\\s\\w-\\.:/\n]*-overwrite[\\sa-z\n]*","java -jar "+generatorPath+jarMybatis+" -configfile "+generatorPath+"generator.xml -overwrite\nexit");
             System.out.println("-----runBatStr:"+runBatStr);
             fileWriter = new FileWriter(runFile);
             bufferedWriter = new BufferedWriter(fileWriter);
@@ -778,10 +775,11 @@ public class OneUpdate{
         iServiceToService();
     }
     public static void main(String[] args){
+        //手动配置好application.properties
         //String daoFolderName,String daoLastName,String serviceFolderName,Object... tableNames
         String tableStr="zudan";
         //执行前，必须先生成target,否则无法获取路径
-        OneUpdate oneUpdate = new OneUpdate("application.properties","mysql-connector-java-5.1.20.jar","dao","Mapper","service","impl",true,tableStr);
+        OneUpdate oneUpdate = new OneUpdate("application.properties","mysql-connector-java-5.1.20.jar", "dao","Mapper", "service","impl",true,tableStr);
 //        oneUpdate.mapperToIService();
 //        oneUpdate.iServiceToService();
         oneUpdate.runFun();//最后输出-----serviceFile，表示运行成功

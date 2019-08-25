@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="guo.dao.ZudanMapper" >
-  <resultMap id="BaseResultMap" type="guo.entity.Zudan" >
+<mapper namespace="guo.com.dao.ZudanMapper" >
+  <resultMap id="BaseResultMap" type="guo.com.entity.Zudan" >
     <id column="zdid" property="zdid" jdbcType="VARCHAR" />
     <result column="zuname" property="zuname" jdbcType="VARCHAR" />
     <result column="userid" property="userid" jdbcType="VARCHAR" />
@@ -34,7 +34,7 @@
     delete from zudan
     where zdid = #{zdid,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="guo.entity.Zudan" >
+  <insert id="insert" parameterType="guo.com.entity.Zudan" >
     insert into zudan (zdid, zuname, userid, 
       zutel, zucardid, zhtitle, 
       houseid, zhimg, zmname, 
@@ -48,7 +48,7 @@
       #{zhtstatus,jdbcType=VARCHAR}, #{zjfstatus,jdbcType=VARCHAR}, #{zprice,jdbcType=VARCHAR}, 
       #{zstime,jdbcType=VARCHAR}, #{zetime,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="guo.entity.Zudan" >
+  <insert id="insertSelective" parameterType="guo.com.entity.Zudan" >
     insert into zudan
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="zdid != null" >
@@ -157,7 +157,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.Zudan" >
+  <update id="updateByPrimaryKeySelective" parameterType="guo.com.entity.Zudan" >
     update zudan
     <set >
       <if test="zuname != null" >
@@ -211,7 +211,7 @@
     </set>
     where zdid = #{zdid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="guo.entity.Zudan" >
+  <update id="updateByPrimaryKey" parameterType="guo.com.entity.Zudan" >
     update zudan
     set zuname = #{zuname,jdbcType=VARCHAR},
       userid = #{userid,jdbcType=VARCHAR},

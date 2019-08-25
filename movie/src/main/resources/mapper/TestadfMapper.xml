@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.TestadfMapper" >
-  <resultMap id="BaseResultMap" type="com.entity.Testadf" >
+<mapper namespace="com.guo.dao.TestadfMapper" >
+  <resultMap id="BaseResultMap" type="com.guo.entity.Testadf" >
     <id column="rid" property="rid" jdbcType="INTEGER" />
     <result column="rast" property="rast" jdbcType="OTHER" />
   </resultMap>
@@ -26,11 +26,11 @@
     delete from testadf
     where rid = #{rid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.entity.Testadf" >
+  <insert id="insert" parameterType="com.guo.entity.Testadf" >
     insert into testadf (rid, rast)
     values (#{rid,jdbcType=INTEGER}, #{rast,jdbcType=OTHER})
   </insert>
-  <insert id="insertSelective" parameterType="com.entity.Testadf" >
+  <insert id="insertSelective" parameterType="com.guo.entity.Testadf" >
     insert into testadf
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="rid != null" >
@@ -49,7 +49,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Testadf" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.guo.entity.Testadf" >
     update testadf
     <set >
       <if test="rast != null" >
@@ -58,7 +58,7 @@
     </set>
     where rid = #{rid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.entity.Testadf" >
+  <update id="updateByPrimaryKey" parameterType="com.guo.entity.Testadf" >
     update testadf
     set rast = #{rast,jdbcType=OTHER}
     where rid = #{rid,jdbcType=INTEGER}

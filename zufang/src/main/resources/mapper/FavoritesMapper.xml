@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="guo.dao.FavoritesMapper" >
-  <resultMap id="BaseResultMap" type="guo.entity.Favorites" >
+<mapper namespace="guo.com.dao.FavoritesMapper" >
+  <resultMap id="BaseResultMap" type="guo.com.entity.Favorites" >
     <id column="fid" property="fid" jdbcType="VARCHAR" />
     <result column="houseid" property="houseid" jdbcType="VARCHAR" />
     <result column="userid" property="userid" jdbcType="VARCHAR" />
@@ -24,13 +24,13 @@
     delete from favorites
     where fid = #{fid,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="guo.entity.Favorites">
+  <insert id="insert" parameterType="guo.com.entity.Favorites">
     insert into favorites (fid, houseid, userid
       )
     values (#{fid,jdbcType=VARCHAR}, #{houseid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="guo.entity.Favorites" useGeneratedKeys="true" keyProperty="fid">
+  <insert id="insertSelective" parameterType="guo.com.entity.Favorites" useGeneratedKeys="true" keyProperty="fid">
     insert into favorites
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="fid != null" >
@@ -55,7 +55,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.Favorites" >
+  <update id="updateByPrimaryKeySelective" parameterType="guo.com.entity.Favorites" >
     update favorites
     <set >
       <if test="houseid != null" >
@@ -67,7 +67,7 @@
     </set>
     where fid = #{fid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="guo.entity.Favorites" >
+  <update id="updateByPrimaryKey" parameterType="guo.com.entity.Favorites" >
     update favorites
     set houseid = #{houseid,jdbcType=VARCHAR},
       userid = #{userid,jdbcType=VARCHAR}

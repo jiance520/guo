@@ -6,22 +6,27 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="common" />
         <module name="movie" />
+        <module name="common" />
         <module name="moduleParent" />
+        <module name="milmajordb2012127" />
         <module name="zufang" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
       <module name="common" target="1.8" />
+      <module name="milmajordb2012127" target="1.8" />
       <module name="movie" target="1.8" />
+      <module name="weapon" target="1.8" />
       <module name="zufang" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="common" options="-parameters" />
+      <module name="milmajordb2012127" options="-parameters" />
       <module name="movie" options="-parameters" />
+      <module name="weapon" options="-parameters" />
       <module name="zufang" options="-parameters" />
     </option>
   </component>

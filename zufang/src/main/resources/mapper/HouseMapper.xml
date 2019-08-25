@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="guo.dao.HouseMapper" >
-  <resultMap id="BaseResultMap" type="guo.entity.House" >
+<mapper namespace="guo.com.dao.HouseMapper" >
+  <resultMap id="BaseResultMap" type="guo.com.entity.House" >
     <id column="houseid" property="houseid" jdbcType="VARCHAR" />
     <result column="htitle" property="htitle" jdbcType="VARCHAR" />
     <result column="himg" property="himg" jdbcType="VARCHAR" />
@@ -117,7 +117,7 @@
     delete from house
     where houseid = #{houseid,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="guo.entity.House" >
+  <insert id="insert" parameterType="guo.com.entity.House" >
     insert into house (houseid, htitle, himg, 
       mname, masterid, mtel, 
       hztype, hdistrict, haddress, 
@@ -139,7 +139,7 @@
       #{hkimg,jdbcType=VARCHAR}, #{hsimg,jdbcType=VARCHAR}, #{hcimg,jdbcType=VARCHAR}, 
       #{hpimg,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="guo.entity.House" >
+  <insert id="insertSelective" parameterType="guo.com.entity.House" >
     insert into house
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="houseid != null" >
@@ -314,7 +314,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.House" >
+  <update id="updateByPrimaryKeySelective" parameterType="guo.com.entity.House" >
     update house
     <set >
       <if test="htitle != null" >
@@ -401,7 +401,7 @@
     </set>
     where houseid = #{houseid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="guo.entity.House" >
+  <update id="updateByPrimaryKey" parameterType="guo.com.entity.House" >
     update house
     set htitle = #{htitle,jdbcType=VARCHAR},
       himg = #{himg,jdbcType=VARCHAR},

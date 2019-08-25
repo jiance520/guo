@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="guo.dao.YuyueMapper" >
-  <resultMap id="BaseResultMap" type="guo.entity.Yuyue" >
+<mapper namespace="guo.com.dao.YuyueMapper" >
+  <resultMap id="BaseResultMap" type="guo.com.entity.Yuyue" >
     <id column="yyid" property="yyid" jdbcType="VARCHAR" />
     <result column="yuname" property="yuname" jdbcType="VARCHAR" />
     <result column="userid" property="userid" jdbcType="VARCHAR" />
@@ -67,7 +67,7 @@
     delete from yuyue
     where yyid = #{yyid,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="guo.entity.Yuyue" >
+  <insert id="insert" parameterType="guo.com.entity.Yuyue" >
     insert into yuyue (yyid, yuname, userid, 
       yhtitle, houseid, yhimg, 
       mname, masterid, yttime, 
@@ -77,7 +77,7 @@
       #{mname,jdbcType=VARCHAR}, #{masterid,jdbcType=VARCHAR}, #{yttime,jdbcType=VARCHAR}, 
       #{yktime,jdbcType=VARCHAR}, #{ystatus,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="guo.entity.Yuyue" >
+  <insert id="insertSelective" parameterType="guo.com.entity.Yuyue" >
     insert into yuyue
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="yyid != null" >
@@ -150,7 +150,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.Yuyue" >
+  <update id="updateByPrimaryKeySelective" parameterType="guo.com.entity.Yuyue" >
     update yuyue
     <set >
       <if test="yuname != null" >
@@ -186,7 +186,7 @@
     </set>
     where yyid = #{yyid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="guo.entity.Yuyue" >
+  <update id="updateByPrimaryKey" parameterType="guo.com.entity.Yuyue" >
     update yuyue
     set yuname = #{yuname,jdbcType=VARCHAR},
       userid = #{userid,jdbcType=VARCHAR},

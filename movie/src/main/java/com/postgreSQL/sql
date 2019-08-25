@@ -1,8 +1,0 @@
---栅格数据源数据,位置坐标
---select rid,(foo.md).* from (select rid,st_metadata(rast) as md from testadf) as foo;
---波段数据元数据，像素类型，NODATA，参数1没有指定默认为第一波段
---select rid,(foo.md).* from (select rid,st_bandmetadata(rast,1) as md from testadf) as foo;
---高程柱状图信息，参数1是一波段，6是分组
---select (stats).* from (select rid,st_histogram(rast,1) as stats from testadf) as foo;
---各波段像元值，返回RGB或高程，1是波段，1,1是坐标位置
---select rid,st_value(rast,1,4,3) as r_val,st_value(rast,2,4,3) as g_val,st_value(rast,3,4,3) as b_val from testadf;
