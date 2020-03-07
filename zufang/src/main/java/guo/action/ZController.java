@@ -119,7 +119,7 @@ public class ZController implements ServletContextAware {
                 if(uhtype==null||"".equals(uhtype)){params.put("uhtype","一居室");}
                 if(umianji==null||"".equals(umianji)){params.put("umianji","60");}
                 if(ufeature==null||"".equals(ufeature)){params.put("ufeature","阳台+厨房");}
-                MapToBeanUtil.backBean(userinfo,params,true);
+                MapToBeanUtil.backBean(userinfo,params);
                 int i = iUserinfoService.insertSelective(userinfo);
                 System.out.println("-----i:"+i);
                 if(i!=1){
@@ -289,7 +289,7 @@ public class ZController implements ServletContextAware {
             if(ystatus==null||"".equals(ystatus)){params.put("ystatus","待通过");}
             List<Map> list = iYuyueService.selectYuyueList(params);
             if(list.isEmpty()){
-                MapToBeanUtil.backBean(yuyue,params,true);
+                MapToBeanUtil.backBean(yuyue,params);
                 num = iYuyueService.insertSelective(yuyue);
                 if(num<=0){
                     backjson = "fail";
@@ -360,7 +360,7 @@ public class ZController implements ServletContextAware {
         System.out.println("-----params:"+params);
         Yuyue yuyue = new Yuyue();
         String backjson = null;
-        MapToBeanUtil.backBean(yuyue,params,true);
+        MapToBeanUtil.backBean(yuyue,params);
         int num = iYuyueService.updateByPrimaryKeySelective(yuyue);
         if(num<=0){
             backjson = "fail";
@@ -380,7 +380,7 @@ public class ZController implements ServletContextAware {
         System.out.println("-----params:"+params);
         Userinfo userinfo = new Userinfo();
         String backjson = null;
-        MapToBeanUtil.backBean(userinfo,params,true);
+        MapToBeanUtil.backBean(userinfo,params);
         int num = iUserinfoService.updateByPrimaryKeySelective(userinfo);
         if(num<=0){
             backjson = "fail";
