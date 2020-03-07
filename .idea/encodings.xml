@@ -2,10 +2,15 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/../f8xn/common" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../f8xn/common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/milmajordb2012127" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/milmajordb2012127/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/milmajordb2012127/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/movie" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/weapon" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/movie/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/movie/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/zufang" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zufang/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zufang/src/main/resources" charset="UTF-8" />
   </component>
 </project>

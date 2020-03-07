@@ -27,16 +27,25 @@
   </parent>
 
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
-    </dependency>
+    <!--spring-boot-starter-test中已经集成了junit4.12-->
+    <!--<dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+        &lt;!&ndash;test，只在测试时使用，用于编译和运行测试代码。不会随项目发布。&ndash;&gt;
+        <scope>test</scope>
+    </dependency>-->
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>common</artifactId>
       <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <!--thymeleaf，th标签 -->
+    <!-- 也可在html中加<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml"> -->
+    <dependency>
+        <groupId>org.thymeleaf</groupId>
+        <artifactId>thymeleaf</artifactId>
+        <version>3.0.11.RELEASE</version>
     </dependency>
   </dependencies>
 

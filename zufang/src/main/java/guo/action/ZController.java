@@ -281,7 +281,7 @@ public class ZController implements ServletContextAware {
             String ystatus = request.getParameter("ystatus");
             if(yuname==null||"".equals(yuname)){params.put("yuname",userinfo.getUname());}
             if(yhtitle==null||"".equals(yhtitle)){params.put("yhtitle",house.getHtitle());}
-            if(yhimg==null||"".equals(yhimg)){params.put("yhimg","http://192.168.52.69:8080/zufang/house.jpg");}
+            if(yhimg==null||"".equals(yhimg)){params.put("yhimg","http://localhost:8080/zufang/house.jpg");}
             if(mname==null||"".equals(mname)){params.put("mname",house.getMname());}
             if(masterid==null||"".equals(masterid)){params.put("masterid",house.getMasterid());}
             if(yttime==null||"".equals(yttime)){params.put("yttime",yttime);}

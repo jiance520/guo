@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="movie" />
         <module name="common" />
+        <module name="zufang" />
+        <module name="movie" />
         <module name="moduleParent" />
         <module name="milmajordb2012127" />
-        <module name="zufang" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">

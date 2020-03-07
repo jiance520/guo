@@ -24,17 +24,17 @@
         <property name="yearIsDateType" value="false" />
       </driver-properties>
     </data-source>
-    <data-source source="LOCAL" name="@localhost" uuid="991cf725-6975-4a6b-a0f4-3f0e1c969ae9">
+    <data-source source="LOCAL" name="Oracle-@106.13.100.117-mytable" uuid="991cf725-6975-4a6b-a0f4-3f0e1c969ae9">
       <driver-ref>oracle</driver-ref>
       <synchronize>true</synchronize>
       <auto-commit>false</auto-commit>
       <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
-      <jdbc-url>jdbc:oracle:thin:@localhost:1521:orcl</jdbc-url>
+      <jdbc-url>jdbc:oracle:thin:@106.13.100.117:1521:orcl</jdbc-url>
       <driver-properties>
         <property name="v$session.program" value="DataGrip" />
       </driver-properties>
     </data-source>
-    <data-source source="LOCAL" name="milmajordb2012127@localhost" uuid="c95f47cb-285b-40f9-b100-f43e75ee7d40">
+    <data-source source="LOCAL" name="MySQL for 5.1 - milmajordb2012127@localhost" uuid="c95f47cb-285b-40f9-b100-f43e75ee7d40">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>

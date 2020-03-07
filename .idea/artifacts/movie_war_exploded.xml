@@ -14,9 +14,7 @@
           <element id="module-output" name="movie" />
         </element>
         <element id="directory" name="lib">
-          <element id="archive" name="common-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="common" />
-          </element>
+          <element id="library" level="project" name="Maven: guo:common:1.0-SNAPSHOT" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-web:2.0.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter:2.0.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.0.1.RELEASE" />

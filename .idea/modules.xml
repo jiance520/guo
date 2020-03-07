@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../f8xn/common/common.iml" filepath="$PROJECT_DIR$/../f8xn/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/milmajordb2012127/milmajordb2012127.iml" filepath="$PROJECT_DIR$/milmajordb2012127/milmajordb2012127.iml" />
       <module fileurl="file://$PROJECT_DIR$/movie/movie.iml" filepath="$PROJECT_DIR$/movie/movie.iml" />
       <module fileurl="file://$PROJECT_DIR$/zufang/zufang.iml" filepath="$PROJECT_DIR$/zufang/zufang.iml" />

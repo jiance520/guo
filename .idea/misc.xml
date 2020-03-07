@@ -14,11 +14,11 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/common/pom.xml" />
         <option value="$PROJECT_DIR$/movie/pom.xml" />
         <option value="$PROJECT_DIR$/moduleParent/pom.xml" />
         <option value="$PROJECT_DIR$/zufang/pom.xml" />
         <option value="$PROJECT_DIR$/milmajordb2012127/pom.xml" />
+        <option value="$PROJECT_DIR$/../f8xn/common/pom.xml" />
       </list>
     </option>
   </component>
