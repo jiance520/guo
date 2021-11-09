@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.T_troops_bu_equipMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.T_troops_bu_equip" >
+    <id column="bu_id" property="buId" jdbcType="INTEGER" />
+    <id column="bu_equip_id" property="buEquipId" jdbcType="INTEGER" />
+    <result column="bu_equip_name" property="buEquipName" jdbcType="VARCHAR" />
+    <result column="bu_equip_type" property="buEquipType" jdbcType="INTEGER" />
+    <result column="bu__equip_number" property="buEquipNumber" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bu_id, bu_equip_id, bu_equip_name, bu_equip_type, bu__equip_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_troops_bu_equip
+    <where>
+      <if test="buId != null and buId !=''" >
+        bu_id = #{buId,jdbcType=INTEGER}
+      </if>
+      <if test="buEquipId != null and buEquipId !=''" >
+        and bu_equip_id = #{buEquipId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from t_troops_bu_equip
+    <where>
+      <if test="buId != null and buId !=''" >
+        bu_id = #{buId,jdbcType=INTEGER}
+      </if>
+      <if test="buEquipId != null and buEquipId !=''" >
+        and bu_equip_id = #{buEquipId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </delete>
+  <insert id="insert" parameterType="guo.entity.T_troops_bu_equip" >
+    insert into t_troops_bu_equip (bu_id, bu_equip_id, bu_equip_name, 
+      bu_equip_type, bu__equip_number)
+    values (#{buId,jdbcType=INTEGER}, #{buEquipId,jdbcType=INTEGER}, #{buEquipName,jdbcType=VARCHAR}, 
+      #{buEquipType,jdbcType=INTEGER}, #{buEquipNumber,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.T_troops_bu_equip" >
+    insert into t_troops_bu_equip
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="buId != null" >
+        bu_id,
+      </if>
+      <if test="buEquipId != null" >
+        bu_equip_id,
+      </if>
+      <if test="buEquipName != null" >
+        bu_equip_name,
+      </if>
+      <if test="buEquipType != null" >
+        bu_equip_type,
+      </if>
+      <if test="buEquipNumber != null" >
+        bu__equip_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="buId != null" >
+        #{buId,jdbcType=INTEGER},
+      </if>
+      <if test="buEquipId != null" >
+        #{buEquipId,jdbcType=INTEGER},
+      </if>
+      <if test="buEquipName != null" >
+        #{buEquipName,jdbcType=VARCHAR},
+      </if>
+      <if test="buEquipType != null" >
+        #{buEquipType,jdbcType=INTEGER},
+      </if>
+      <if test="buEquipNumber != null" >
+        #{buEquipNumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.T_troops_bu_equip" >
+    update t_troops_bu_equip
+    <set >
+      <if test="buEquipName != null" >
+        bu_equip_name = #{buEquipName,jdbcType=VARCHAR},
+      </if>
+      <if test="buEquipType != null" >
+        bu_equip_type = #{buEquipType,jdbcType=INTEGER},
+      </if>
+      <if test="buEquipNumber != null" >
+        bu__equip_number = #{buEquipNumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    where bu_id = #{buId,jdbcType=INTEGER}
+      and bu_equip_id = #{buEquipId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.T_troops_bu_equip" >
+    update t_troops_bu_equip
+    set bu_equip_name = #{buEquipName,jdbcType=VARCHAR},
+      bu_equip_type = #{buEquipType,jdbcType=INTEGER},
+      bu__equip_number = #{buEquipNumber,jdbcType=INTEGER}
+    where bu_id = #{buId,jdbcType=INTEGER}
+      and bu_equip_id = #{buEquipId,jdbcType=INTEGER}
+  </update>
+</mapper>

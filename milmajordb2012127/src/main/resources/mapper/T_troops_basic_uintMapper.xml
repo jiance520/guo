@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.T_troops_basic_uintMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.T_troops_basic_uint" >
+    <id column="bu_id" property="buId" jdbcType="INTEGER" />
+    <result column="bu_name" property="buName" jdbcType="VARCHAR" />
+    <result column="bu_level" property="buLevel" jdbcType="INTEGER" />
+    <result column="bu_weave" property="buWeave" jdbcType="INTEGER" />
+    <result column="bu_info_campaign_f" property="buInfoCampaignF" jdbcType="INTEGER" />
+    <result column="bu_unit_type" property="buUnitType" jdbcType="INTEGER" />
+    <result column="bu_description" property="buDescription" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bu_id, bu_name, bu_level, bu_weave, bu_info_campaign_f, bu_unit_type, bu_description
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select <include refid="Base_Column_List" /> from T_troops_basic_uint
+    <where>
+      <if test="bu_info_campaign_f !=null">
+        bu_info_campaign_f = #{bu_info_campaign_f,jdbcType=INTEGER}
+      </if>
+      <if test="bu_level !=null">
+        and bu_level = #{bu_level,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_troops_basic_uint
+    where bu_id = #{buId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_troops_basic_uint
+    where bu_id = #{buId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.T_troops_basic_uint" >
+    insert into t_troops_basic_uint (bu_id, bu_name, bu_level, 
+      bu_weave, bu_info_campaign_f, bu_unit_type, 
+      bu_description)
+    values (#{buId,jdbcType=INTEGER}, #{buName,jdbcType=VARCHAR}, #{buLevel,jdbcType=INTEGER}, 
+      #{buWeave,jdbcType=INTEGER}, #{buInfoCampaignF,jdbcType=INTEGER}, #{buUnitType,jdbcType=INTEGER}, 
+      #{buDescription,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.T_troops_basic_uint" useGeneratedKeys="true" keyProperty="buId">
+    insert into t_troops_basic_uint
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="buId != null" >
+        bu_id,
+      </if>
+      <if test="buName != null" >
+        bu_name,
+      </if>
+      <if test="buLevel != null" >
+        bu_level,
+      </if>
+      <if test="buWeave != null" >
+        bu_weave,
+      </if>
+      <if test="buInfoCampaignF != null" >
+        bu_info_campaign_f,
+      </if>
+      <if test="buUnitType != null" >
+        bu_unit_type,
+      </if>
+      <if test="buDescription != null" >
+        bu_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="buId != null" >
+        #{buId,jdbcType=INTEGER},
+      </if>
+      <if test="buName != null" >
+        #{buName,jdbcType=VARCHAR},
+      </if>
+      <if test="buLevel != null" >
+        #{buLevel,jdbcType=INTEGER},
+      </if>
+      <if test="buWeave != null" >
+        #{buWeave,jdbcType=INTEGER},
+      </if>
+      <if test="buInfoCampaignF != null" >
+        #{buInfoCampaignF,jdbcType=INTEGER},
+      </if>
+      <if test="buUnitType != null" >
+        #{buUnitType,jdbcType=INTEGER},
+      </if>
+      <if test="buDescription != null" >
+        #{buDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.T_troops_basic_uint" >
+    update t_troops_basic_uint
+    <set >
+      <if test="buName != null" >
+        bu_name = #{buName,jdbcType=VARCHAR},
+      </if>
+      <if test="buLevel != null" >
+        bu_level = #{buLevel,jdbcType=INTEGER},
+      </if>
+      <if test="buWeave != null" >
+        bu_weave = #{buWeave,jdbcType=INTEGER},
+      </if>
+      <if test="buInfoCampaignF != null" >
+        bu_info_campaign_f = #{buInfoCampaignF,jdbcType=INTEGER},
+      </if>
+      <if test="buUnitType != null" >
+        bu_unit_type = #{buUnitType,jdbcType=INTEGER},
+      </if>
+      <if test="buDescription != null" >
+        bu_description = #{buDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where bu_id = #{buId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.T_troops_basic_uint" >
+    update t_troops_basic_uint
+    set bu_name = #{buName,jdbcType=VARCHAR},
+      bu_level = #{buLevel,jdbcType=INTEGER},
+      bu_weave = #{buWeave,jdbcType=INTEGER},
+      bu_info_campaign_f = #{buInfoCampaignF,jdbcType=INTEGER},
+      bu_unit_type = #{buUnitType,jdbcType=INTEGER},
+      bu_description = #{buDescription,jdbcType=VARCHAR}
+    where bu_id = #{buId,jdbcType=INTEGER}
+  </update>
+</mapper>

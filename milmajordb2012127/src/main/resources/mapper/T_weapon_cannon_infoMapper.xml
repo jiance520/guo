@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.T_weapon_cannon_infoMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.T_weapon_cannon_info" >
+    <id column="w_info_id" property="wInfoId" jdbcType="INTEGER" />
+    <result column="w_info_name" property="wInfoName" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="w_info_model_id" property="wInfoModelId" jdbcType="VARCHAR" />
+    <result column="w_info_cannon_type" property="wInfoCannonType" jdbcType="INTEGER" />
+    <result column="w_info_cannon_caliber" property="wInfoCannonCaliber" jdbcType="DOUBLE" />
+    <result column="w_info_cannon_length" property="wInfoCannonLength" jdbcType="DOUBLE" />
+    <result column="w_info_cannon_weight" property="wInfoCannonWeight" jdbcType="DOUBLE" />
+    <result column="w_info_slant_space" property="wInfoSlantSpace" jdbcType="DOUBLE" />
+    <result column="w_info_effect_shot" property="wInfoEffectShot" jdbcType="DOUBLE" />
+    <result column="w_info_first_speed" property="wInfoFirstSpeed" jdbcType="DOUBLE" />
+    <result column="w_info_max_shot" property="wInfoMaxShot" jdbcType="INTEGER" />
+    <result column="w_info_height_limit" property="wInfoHeightLimit" jdbcType="INTEGER" />
+    <result column="w_info_effect_height" property="wInfoEffectHeight" jdbcType="INTEGER" />
+    <result column="w_info_direction_limit" property="wInfoDirectionLimit" jdbcType="INTEGER" />
+    <result column="w_info_bomb_speed" property="wInfoBombSpeed" jdbcType="INTEGER" />
+    <result column="w_info_made" property="wInfoMade" jdbcType="INTEGER" />
+    <result column="w_info_campaign_f" property="wInfoCampaignF" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    w_info_id, w_info_name, type_id, w_info_model_id, w_info_cannon_type, w_info_cannon_caliber, 
+    w_info_cannon_length, w_info_cannon_weight, w_info_slant_space, w_info_effect_shot, 
+    w_info_first_speed, w_info_max_shot, w_info_height_limit, w_info_effect_height, w_info_direction_limit, 
+    w_info_bomb_speed, w_info_made, w_info_campaign_f
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from T_weapon_cannon_info
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_weapon_cannon_info
+    where w_info_id = #{wInfoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_weapon_cannon_info
+    where w_info_id = #{wInfoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.T_weapon_cannon_info" >
+    insert into t_weapon_cannon_info (w_info_id, w_info_name, type_id, 
+      w_info_model_id, w_info_cannon_type, w_info_cannon_caliber, 
+      w_info_cannon_length, w_info_cannon_weight, w_info_slant_space, 
+      w_info_effect_shot, w_info_first_speed, w_info_max_shot, 
+      w_info_height_limit, w_info_effect_height, w_info_direction_limit, 
+      w_info_bomb_speed, w_info_made, w_info_campaign_f
+      )
+    values (#{wInfoId,jdbcType=INTEGER}, #{wInfoName,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, 
+      #{wInfoModelId,jdbcType=VARCHAR}, #{wInfoCannonType,jdbcType=INTEGER}, #{wInfoCannonCaliber,jdbcType=DOUBLE}, 
+      #{wInfoCannonLength,jdbcType=DOUBLE}, #{wInfoCannonWeight,jdbcType=DOUBLE}, #{wInfoSlantSpace,jdbcType=DOUBLE}, 
+      #{wInfoEffectShot,jdbcType=DOUBLE}, #{wInfoFirstSpeed,jdbcType=DOUBLE}, #{wInfoMaxShot,jdbcType=INTEGER}, 
+      #{wInfoHeightLimit,jdbcType=INTEGER}, #{wInfoEffectHeight,jdbcType=INTEGER}, #{wInfoDirectionLimit,jdbcType=INTEGER}, 
+      #{wInfoBombSpeed,jdbcType=INTEGER}, #{wInfoMade,jdbcType=INTEGER}, #{wInfoCampaignF,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.T_weapon_cannon_info" useGeneratedKeys="true" keyProperty="wInfoId">
+    insert into t_weapon_cannon_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wInfoId != null" >
+        w_info_id,
+      </if>
+      <if test="wInfoName != null" >
+        w_info_name,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="wInfoModelId != null" >
+        w_info_model_id,
+      </if>
+      <if test="wInfoCannonType != null" >
+        w_info_cannon_type,
+      </if>
+      <if test="wInfoCannonCaliber != null" >
+        w_info_cannon_caliber,
+      </if>
+      <if test="wInfoCannonLength != null" >
+        w_info_cannon_length,
+      </if>
+      <if test="wInfoCannonWeight != null" >
+        w_info_cannon_weight,
+      </if>
+      <if test="wInfoSlantSpace != null" >
+        w_info_slant_space,
+      </if>
+      <if test="wInfoEffectShot != null" >
+        w_info_effect_shot,
+      </if>
+      <if test="wInfoFirstSpeed != null" >
+        w_info_first_speed,
+      </if>
+      <if test="wInfoMaxShot != null" >
+        w_info_max_shot,
+      </if>
+      <if test="wInfoHeightLimit != null" >
+        w_info_height_limit,
+      </if>
+      <if test="wInfoEffectHeight != null" >
+        w_info_effect_height,
+      </if>
+      <if test="wInfoDirectionLimit != null" >
+        w_info_direction_limit,
+      </if>
+      <if test="wInfoBombSpeed != null" >
+        w_info_bomb_speed,
+      </if>
+      <if test="wInfoMade != null" >
+        w_info_made,
+      </if>
+      <if test="wInfoCampaignF != null" >
+        w_info_campaign_f,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wInfoId != null" >
+        #{wInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoName != null" >
+        #{wInfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoModelId != null" >
+        #{wInfoModelId,jdbcType=VARCHAR},
+      </if>
+      <if test="wInfoCannonType != null" >
+        #{wInfoCannonType,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoCannonCaliber != null" >
+        #{wInfoCannonCaliber,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoCannonLength != null" >
+        #{wInfoCannonLength,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoCannonWeight != null" >
+        #{wInfoCannonWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoSlantSpace != null" >
+        #{wInfoSlantSpace,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoEffectShot != null" >
+        #{wInfoEffectShot,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoFirstSpeed != null" >
+        #{wInfoFirstSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoMaxShot != null" >
+        #{wInfoMaxShot,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoHeightLimit != null" >
+        #{wInfoHeightLimit,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoEffectHeight != null" >
+        #{wInfoEffectHeight,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoDirectionLimit != null" >
+        #{wInfoDirectionLimit,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoBombSpeed != null" >
+        #{wInfoBombSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoMade != null" >
+        #{wInfoMade,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoCampaignF != null" >
+        #{wInfoCampaignF,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.T_weapon_cannon_info" >
+    update t_weapon_cannon_info
+    <set >
+      <if test="wInfoName != null" >
+        w_info_name = #{wInfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoModelId != null" >
+        w_info_model_id = #{wInfoModelId,jdbcType=VARCHAR},
+      </if>
+      <if test="wInfoCannonType != null" >
+        w_info_cannon_type = #{wInfoCannonType,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoCannonCaliber != null" >
+        w_info_cannon_caliber = #{wInfoCannonCaliber,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoCannonLength != null" >
+        w_info_cannon_length = #{wInfoCannonLength,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoCannonWeight != null" >
+        w_info_cannon_weight = #{wInfoCannonWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoSlantSpace != null" >
+        w_info_slant_space = #{wInfoSlantSpace,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoEffectShot != null" >
+        w_info_effect_shot = #{wInfoEffectShot,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoFirstSpeed != null" >
+        w_info_first_speed = #{wInfoFirstSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoMaxShot != null" >
+        w_info_max_shot = #{wInfoMaxShot,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoHeightLimit != null" >
+        w_info_height_limit = #{wInfoHeightLimit,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoEffectHeight != null" >
+        w_info_effect_height = #{wInfoEffectHeight,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoDirectionLimit != null" >
+        w_info_direction_limit = #{wInfoDirectionLimit,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoBombSpeed != null" >
+        w_info_bomb_speed = #{wInfoBombSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoMade != null" >
+        w_info_made = #{wInfoMade,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoCampaignF != null" >
+        w_info_campaign_f = #{wInfoCampaignF,jdbcType=INTEGER},
+      </if>
+    </set>
+    where w_info_id = #{wInfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.T_weapon_cannon_info" >
+    update t_weapon_cannon_info
+    set w_info_name = #{wInfoName,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      w_info_model_id = #{wInfoModelId,jdbcType=VARCHAR},
+      w_info_cannon_type = #{wInfoCannonType,jdbcType=INTEGER},
+      w_info_cannon_caliber = #{wInfoCannonCaliber,jdbcType=DOUBLE},
+      w_info_cannon_length = #{wInfoCannonLength,jdbcType=DOUBLE},
+      w_info_cannon_weight = #{wInfoCannonWeight,jdbcType=DOUBLE},
+      w_info_slant_space = #{wInfoSlantSpace,jdbcType=DOUBLE},
+      w_info_effect_shot = #{wInfoEffectShot,jdbcType=DOUBLE},
+      w_info_first_speed = #{wInfoFirstSpeed,jdbcType=DOUBLE},
+      w_info_max_shot = #{wInfoMaxShot,jdbcType=INTEGER},
+      w_info_height_limit = #{wInfoHeightLimit,jdbcType=INTEGER},
+      w_info_effect_height = #{wInfoEffectHeight,jdbcType=INTEGER},
+      w_info_direction_limit = #{wInfoDirectionLimit,jdbcType=INTEGER},
+      w_info_bomb_speed = #{wInfoBombSpeed,jdbcType=INTEGER},
+      w_info_made = #{wInfoMade,jdbcType=INTEGER},
+      w_info_campaign_f = #{wInfoCampaignF,jdbcType=INTEGER}
+    where w_info_id = #{wInfoId,jdbcType=INTEGER}
+  </update>
+</mapper>

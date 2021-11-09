@@ -1,6 +1,10 @@
 package guo.utils;
 
+import com.utils.StringIndex;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.net.URL;
@@ -11,51 +15,65 @@ import java.util.Properties;
 import java.util.regex.Pattern;
 
 //必须放在utils文件夹，否则手动修改必须保证所有文件夹名规范，dao,service,才能使用此工具
+//数据库中的大写在对象属性中是小写，数据库中下划线后的字母在对象属性中是大写，
 //@Component
-//@Configuration构造函数的入参，必须用存在的属性？
-//@PropertySource("classpath:/application.properties")自定义配置文件
+//@Configuration //当前类是一个配置类，同.xml,.properties。
+//浅析PropertySource 基本使用https://www.cnblogs.com/cxuanBlog/p/10927823.html
+//@PropertySource("classpath:/config.properties")自定义使用哪个配置文件来注入属性值，通常结合@Configuration
+//@PropertySource(value = "classpath:application.properties",ignoreResourceNotFound = false)
+@Component
 public class OneUpdate {
-    private String jarName = "";//mysql-connector-java-5.1.20.jar
-    private String propertiesName="";//application.properties
-    private String resourcesPath="";//D:\workspace\idea\guo\zufang\src\main\resources
-    private String jarLocation="";//D:\workspace\idea\guo\zufang\src\main\resources\mybatisGenerator\mysql-connector-java-5.1.20.jar
+    private static final Logger logger = LoggerFactory.getLogger(OneUpdate.class);
+    //private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(OneUpdate.class.getName());
+    private String jarName = "";//mysql-connector-java-5.1.47.jar
+    private String propertiesName="";//config.properties
+    private String resourcesPath="";//D:/workspace/idea/com/zufang/src/main/resources
+    private String jarLocation="";//D:/workspace/idea/com/zufang/src/main/resources/mybatisGenerator/mysql-connector-java-5.1.47.jar
     @Value("${spring.datasource.driver-class-name}")
-    private String driverClass="";//com.mysql.jdbc.Driver
+    private String driverClass;//com.mysql.jdbc.Driver
     @Value("${spring.datasource.url}")
-    private String connectionURL="";//jdbc:mysql://localhost:3306/src?characterEncoding=utf8
-    private String javaModelGenerator="";//guo.entity
-    private String javaTargetProject="";//D:/workspace/idea/guo/zufang/src/main/java
+    private String connectionURL;//jdbc:mysql://localhost:3306/src?characterEncoding=utf8
+    @Value("spring.datasource.name")
+    private String dataBaseName;//数据库名不一定是工程名，所以generator.xml要检查。
+    private String javaModelGenerator="";//com.entity
+    private String javaTargetProject="";//D:/workspace/idea/com/zufang/src/main/java
     private String sqlMapGenerator="";//resources.mapper
-    private String sqlTargetProject="";//D:/workspace/idea/guo/zufang/src/main
-    private String clientGenerator="";//guo.dao
-    private String clientTargetProject="";//D:/workspace/idea/guo/zufang/src/main/java
+    private String sqlTargetProject="";//D:/workspace/idea/com/zufang/src/main
+    private String clientGenerator="";//com.dao
+    private String clientTargetProject="";//D:/workspace/idea/com/zufang/src/main/java
     @Value("${spring.datasource.username}")//只有在项目运行时才能获取？
-    private String userId="";//root
+    private String userId;//root
     @Value("${spring.datasource.password}")
-    private String password="";//root
-    @Value("${server.servlet.context-path}")
-    private String projectName = "";//zufang,工程名不一定是数据库名，所以generator.xml要检查。
-    private String generatorPath = "";//D:\workspace\idea\guo\zufang\src\main\resources\mybatisGenerator\
+    private String password;//root
+    //@Value("${server.servlet.context-path}") //由于springcloud的yml不配置context-path，这里读取会报错，
+    private String projectName;//zufang,工程名不一定是数据库名，所以generator.xml要检查。
+    private String generatorPath = "D:/workspace/idea/springcloud/f8xn/src/resources/mybatisGenerator/";// D:/workspace/idea/springcloud/f8xn/src/resources/mybatisGenerator/，不能是路径\\
     private String jarMybatis = "mybatis-generator-core-1.3.2.jar";
+    //private URL oneUpdateURL = "file:/D:/workspace/idea/springcloud/f8xn/autof8/target/classes/com/utils/";
+    private URL oneUpdateURL = OneUpdate.class.getResource("");//=this.getClass().getResource("/").toString();当前类或utils所在的本地target中的URL。在当前调用类的同一路径下查找该资源""
+    private String oneUpdatePath = "";
+    //private String oneUpdatePath = "file:/D:/workspace/idea/springcloud/f8xn/autof8/target/classes/com/utils/";//项目目录file /x:/xxx/target/classes/com/utils/
     private boolean flagDel = false;//重构是否删除原来的dao、entity、mapper.xml。false不删除
-    private String cmd = "";//"cmd /k start D:\\workspace\\idea\\guo\\zufang\\src\\main\\resources\\mybatisGenerator\\run.bat";
-    private String comName = "";//guo 、com
+    private String cmd = "";//"cmd /k start D:/workspace/idea/com/zufang/src/main/resources/mybatisGenerator/run.bat";
+    private String comName = "";//com
     private String daoFolderName = "";//dao
     private String daoLastName = "";//Dao、Mapper
-    private String entityName = "entity";//entity，这个必须填写，不能为空
+    private String entityName = "";//entity，这个必须填写，不能为空
     private String iServiceFolderName = "";//service
     private String serviceFolderName = "";//impl
     private String tableName = "";//tableName=entity,区分大小写，Testtype。
     private String[] tableNameArr = null;
-    //oneUpdateURL=file:/D:/workspace/idea/guo/zufang/target/classes/guo/utils/
-    private URL oneUpdateURL = OneUpdate.class.getResource("");//当前类所在的本地URL。
-    private String daoPath = "";//D:\workspace\idea\guo\zufang\src\main\java\guo\dao
-    private String iServicePath = "";//D:\workspace\idea\guo\zufang\src\main\java\guo\service
-    private String servicePath = "";//D:\workspace\idea\guo\zufang\src\main\java\guo\service\impl
-    //private String daoPackageName = comName+"."+daoFolderName;//guo.dao;
-    //private String iServicePackageName = comName+"."+iServiceFolderName;;//guo.service
-    //private String servicePackageName = comName+"."+serviceFolderName;//guo.service.impl
-    public OneUpdate(String propertiesName, String jarName, String daoFolderName, String daoLastName, String iServiceFolderName, String serviceFolderName, boolean flagDel, Object... tableNames){
+    private String daoPath = "";//D:/workspace/idea/guo/zufang/src/main/java/com/dao
+    private String iServicePath = "";//D:/workspace/idea/guo/zufang/src/main/java/com/service
+    private String servicePath = "";//D:/workspace/idea/guo/zufang/src/main/java/com/service/impl
+    private String actionPath = "";
+    public OneUpdate(){
+        super();
+    }
+    //private String daoPackageName = comName+"."+daoFolderName;//com.dao;
+    //private String iServicePackageName = comName+"."+iServiceFolderName;;//com.service
+    //private String servicePackageName = comName+"."+serviceFolderName;//com.service.impl
+    public OneUpdate(String propertiesName, String jarName, String daoFolderName, String entityName, String daoLastName, String iServiceFolderName, String serviceFolderName, boolean flagDel, Object... tableNames){
         if(this.propertiesName==null||"".equals(this.propertiesName)){
             this.propertiesName=propertiesName;
         }
@@ -65,6 +83,8 @@ public class OneUpdate {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //-----------由于不启动，不能通过@Value取config.properties里的属性值(已验证)，以下必须-----------
         if(this.userId==null||"".equals(this.userId)){
             userId = properties.getProperty("spring.datasource.username");
         }
@@ -77,8 +97,36 @@ public class OneUpdate {
         if(this.connectionURL==null||"".equals(this.connectionURL)){
             connectionURL = properties.getProperty("spring.datasource.url");
         }
+        if(connectionURL.contains("?")){
+            connectionURL = connectionURL.replaceAll("&","&amp;");
+        }
+        if(this.dataBaseName==null||"".equals(this.dataBaseName)){
+            dataBaseName = properties.getProperty("spring.datasource.name");
+            if(this.dataBaseName==null||"".equals(this.dataBaseName)){
+                if(connectionURL.contains("mysql")){
+                    int indexStart = StringIndex.indexOf(connectionURL,"/" ,3);
+                    int indexEnd = connectionURL.indexOf("?");
+                    this.dataBaseName=connectionURL.substring(indexStart+1,indexEnd);
+                }
+                else if(connectionURL.contains("oracle")){
+                    int indexStart = connectionURL.lastIndexOf(":");
+                    this.dataBaseName=connectionURL.substring(indexStart+1);
+                }
+                else if(connectionURL.contains("postgresql")){
+                    int indexStart = StringIndex.indexOf(connectionURL,"/" ,3);
+                    int indexEnd = connectionURL.indexOf("?");
+                    this.dataBaseName=connectionURL.substring(indexStart+1,indexEnd);
+                }
+                else {
+                    logger.info("-----没有匹配到数据库名，请在OneUpdate.java的100行增加数据库");
+                    System.exit(0);//0停止程序，1是异常停止。
+                }
+            }
+        }
+        //-------------------以上必需------------------------
 
         if(this.daoFolderName==null||"".equals(this.daoFolderName)){this.daoFolderName =daoFolderName;}
+        if(this.entityName==null||"".equals(this.entityName)){this.entityName =entityName;}
         if(this.daoLastName==null||"".equals(this.daoLastName)){this.daoLastName =daoLastName;}
         if(this.iServiceFolderName==null||"".equals(this.iServiceFolderName)){this.iServiceFolderName=iServiceFolderName;}
         if(this.serviceFolderName==null||"".equals(this.serviceFolderName)){this.serviceFolderName =serviceFolderName;}
@@ -95,7 +143,7 @@ public class OneUpdate {
             }
             String[] tableArr = tableStr.split("\n");
             for (int i = 0; i <tableArr.length ; i++) {
-                tableArr[i]=StringIndex.upFirstWord(tableArr[i]);
+                tableArr[i]= StringIndex.upFirstWord(tableArr[i]);
             }
             this.tableNameArr = tableArr;
             this.tableName = tableArr[0];
@@ -107,22 +155,24 @@ public class OneUpdate {
             if(this.tableNameArr==null){
                 this.tableNameArr = new String[tableNames.length];
                 for (int i = 0; i <tableNames.length ; i++) {
-                    this.tableNameArr[i]=StringIndex.upFirstWord(tableNames[i].toString());
+                    this.tableNameArr[i]= StringIndex.upFirstWord(tableNames[i].toString());
                 }
             }
         }
-        String oneUpdatePath = this.oneUpdateURL.toString();
-        System.out.println("oneUpdateURLStr:"+oneUpdatePath);
-        oneUpdatePath=oneUpdatePath.replaceAll("file:/","");
-        oneUpdatePath=oneUpdatePath.replaceAll("target/classes","src/main/java");
-        //oneUpdatePath=D:/workspace/idea/guo/zufang/src/main/java/guo/utils/
-        String utils = StringIndex.substringLastIndexOf(oneUpdatePath,"/",1,2);
+        if(this.oneUpdatePath==null||"".equals(this.oneUpdatePath)){
+            this.oneUpdatePath = this.oneUpdateURL.toString();
+            System.out.println("oneUpdateURLStr:"+oneUpdatePath);
+        }
+        this.oneUpdatePath=this.oneUpdatePath.replaceAll("file:/","");
+        this.oneUpdatePath=this.oneUpdatePath.replaceAll("target/classes","src/main/java");
+        //oneUpdatePath=D:/workspace/idea/guo/zufang/src/main/java/com/utils/
+        String utils = StringIndex.substringLastIndexOf(this.oneUpdatePath,"/",1,2);
         if(this.daoPath==null||"".equals(this.daoPath)){
-            this.daoPath = oneUpdatePath.replaceAll(utils, daoFolderName);
+            this.daoPath = this.oneUpdatePath.replaceAll(utils, daoFolderName);
             System.out.println("-----daoPath:"+this.daoPath);
         }
         if(this.projectName==null||"".equals(this.projectName)){
-            this.projectName=StringIndex.substringLastIndexOf(this.daoPath,"/",6,7);
+            this.projectName= StringIndex.substringLastIndexOf(this.daoPath,"/",6,7);
             //this.projectName=properties.getProperty("server.servlet.context-path");
         }
         if(this.comName==null||"".equals(this.comName)){
@@ -149,17 +199,6 @@ public class OneUpdate {
             this.jarLocation=this.generatorPath+this.jarName;
             System.out.println("-----jarLocation:"+this.jarLocation);
         }
-//        if(this.jarName.contains("mysql")){
-//            this.driverClass="com.mysql.jdbc.Driver";
-//            this.connectionURL="jdbc:mysql://localhost:3306/"+this.projectName+"?characterEncoding=utf8";
-//        }
-//        else if(this.jarName.contains("ojdbc")||this.jarName.contains("oracle")){
-//            this.driverClass="oracle.jdbc.driver.OracleDriver";
-//            this.connectionURL="jdbc:oracle:thin:@localhost:1521:orcl";
-//        }
-//        else {
-//            System.out.println("-----输入的jarName不规范:");
-//        }
         if(this.javaModelGenerator==null||"".equals(this.javaModelGenerator)){
             this.javaModelGenerator=this.comName+"."+entityName;
         }
@@ -185,8 +224,8 @@ public class OneUpdate {
             System.out.println("-----clientTargetProject:"+this.clientTargetProject);
         }
         if(this.resourcesPath==null||"".equals(this.resourcesPath)){
-            //oneUpdatePath=D:/workspace/idea/guo/zufang/src/main/java/guo/utils/
-            int index=StringIndex.lastIndexOf(oneUpdatePath,"/",4);
+            //oneUpdatePath=D:/workspace/idea/guo/zufang/src/main/java/com/utils/
+            int index= StringIndex.lastIndexOf(oneUpdatePath,"/",4);
             this.resourcesPath = oneUpdatePath.substring(0,index+1)+"resources/";
             System.out.println("-----resourcesPath:"+resourcesPath);
         }
@@ -219,7 +258,7 @@ public class OneUpdate {
 //    }
 //    public String getDaoPackageName(){
 //        if(daoPackageName==null||"".equals(daoPackageName)){
-//            String classStr = OneUpdate.class.getName();//guo.utils.OneUpdate
+//            String classStr = OneUpdate.class.getName();//com.utils.OneUpdate
 //            classStr=classStr.substring(0,classStr.lastIndexOf(".")-1);
 //            classStr = classStr.replaceAll(classStr.substring(classStr.indexOf(".")+1), daoFolderName);
 //            this.daoPackageName = classStr;
@@ -229,7 +268,7 @@ public class OneUpdate {
 //    }
 //    public String getIServicePackageName(){
 //        if(iServicePackageName==null||"".equals(iServicePackageName)){
-//            String classStr = OneUpdate.class.getName();//guo.utils.OneUpdate
+//            String classStr = OneUpdate.class.getName();//com.utils.OneUpdate
 //            classStr=classStr.substring(0,classStr.lastIndexOf(".")-1);
 //            classStr = classStr.replaceAll(classStr.substring(classStr.indexOf(".")+1), iServiceFolderName);
 //            this.iServicePackageName = classStr;
@@ -239,7 +278,7 @@ public class OneUpdate {
 //    }
 //    public String getServicePackageName(){
 //        if(servicePackageName==null||"".equals(servicePackageName)){
-//            String classStr = OneUpdate.class.getName();//guo.utils.OneUpdate
+//            String classStr = OneUpdate.class.getName();//com.utils.OneUpdate
 //            classStr=classStr.substring(0,classStr.lastIndexOf(".")-1);
 //            classStr = classStr.replaceAll(classStr.substring(classStr.indexOf(".")+1), iServiceFolderName +"."+ serviceFolderName);
 //            this.servicePackageName = classStr;
@@ -303,7 +342,7 @@ public class OneUpdate {
 //            StringBuffer stringBuffer = new StringBuffer();
 //            String tableStr = null;
 //            for (int i = 0; i <tableList.size() ; i++) {
-//                tableObj = tableObj.replaceAll("schema=\"\\S+\" ", "schema=\""+projectName+"\" ");
+//                tableObj = tableObj.replaceAll("schema=\"\\S+\" ", "schema=\""+dataBaseName+"\" ");
 //                tableObj = tableObj.replaceAll("tableName=\"\\S+\"", "tableName=\""+tableList.get(i)+"\"");
 //                tableStr = tableList.get(i).substring(0,1).toUpperCase()+tableList.get(i).substring(1);//截取第一个大写，再拼接，再替换
 //                tableObj = tableObj.replaceAll("domainObjectName=\"\\S+\" ", "domainObjectName=\""+tableStr+"\" ");
@@ -313,7 +352,7 @@ public class OneUpdate {
         StringBuffer stringBuffer = new StringBuffer();
         String tableStr = null;
         for (int i = 0; i <tableNameArr.length ; i++) {
-            tableObj = tableObj.replaceAll("schema=\"\\S+\" ", "schema=\""+projectName+"\" ");
+            tableObj = tableObj.replaceAll("schema=\"\\S+\" ", "schema=\""+dataBaseName+"\" ");
             tableObj = tableObj.replaceAll("tableName=\"\\S+\"", "tableName=\""+tableNameArr[i]+"\"");
             tableStr = tableNameArr[i].substring(0,1).toUpperCase()+tableNameArr[i].substring(1);//截取第一个大写，再拼接，再替换
             tableObj = tableObj.replaceAll("domainObjectName=\"\\S+\" ", "domainObjectName=\""+tableStr+"\" ");
@@ -342,12 +381,20 @@ public class OneUpdate {
                 unicode = bufferedReader.read();
             }
             String generatorXmlStr = generatorXml.toString();
-            generatorXmlStr = generatorXmlStr.replaceAll("location=\"[\\u4e00-\\u9fa5\\w\\.-:-/\\\\]+\\.jar\"","location=\""+jarLocation+"\"");
-            generatorXmlStr = generatorXmlStr.replaceAll("driverClass=\"[\\w\\.]+Driver","driverClass=\""+driverClass);
-            generatorXmlStr = generatorXmlStr.replaceAll("connectionURL=\"[\\w\\.-_:=/\\\\]+\" userId","connectionURL=\""+connectionURL+"\" userId");
-            generatorXmlStr = generatorXmlStr.replaceAll("<javaModelGenerator[\\s]+targetPackage=\"[\\w\\./]*+\"[\\s]+targetProject=\"[\\u4e00-\\u9fa5\\w\\.-_:/\\\\]+\">","<javaModelGenerator targetPackage=\""+javaModelGenerator+"\" targetProject=\""+javaTargetProject+"\">");
-            generatorXmlStr = generatorXmlStr.replaceAll("<sqlMapGenerator[\\s]+targetPackage=\"[\\w\\./]*+\"[\\s]+targetProject=\"[\\u4e00-\\u9fa5\\w\\.-_:/\\\\]+\">","<sqlMapGenerator targetPackage=\""+sqlMapGenerator+"\" targetProject=\""+sqlTargetProject+"\">");
-            generatorXmlStr = generatorXmlStr.replaceAll("<javaClientGenerator[\\s]+targetPackage=\"[\\w\\./]*+\"[\\s]+targetProject=\"[\\u4e00-\\u9fa5\\w\\.-_:/\\\\]+\" type=\"XMLMAPPER\">","<javaClientGenerator targetPackage=\""+clientGenerator+"\" targetProject=\""+clientTargetProject+"\" type=\"XMLMAPPER\">");
+            generatorXmlStr = generatorXmlStr.replaceAll("location=\"[\\u4e00-\\u9fa5\\w\\.\\-:/\\\\]+\\.jar\"","location=\""+jarLocation+"\"");
+            if(connectionURL.contains("mysql-connector-java-6")||connectionURL.contains("mysql-connector-java-8")){
+                logger.info("请使用低于6版本的mysql驱动，否则修改generator和OneUpdate.java");
+                System.exit(0);
+            }
+            else {
+                //generatorXmlStr = generatorXmlStr.replaceAll("driverClass=\"[\\w\\.]+Driver","driverClass=\""+driverClass); //后面不要加+"\""
+                generatorXmlStr = generatorXmlStr.replaceAll("driverClass=\"[\\w\\.]+Driver","driverClass=\""+driverClass); //后面不要加+"\""
+            }
+            generatorXmlStr = generatorXmlStr.replaceAll("connectionURL=\"[\\w\\.\\-:=&;\\? /\\\\]*\" userId","connectionURL=\""+connectionURL+"\" userId");
+            generatorXmlStr = generatorXmlStr.replaceAll("&(?!amp;)","&amp;");
+            generatorXmlStr = generatorXmlStr.replaceAll("<javaModelGenerator[\\s]+targetPackage=\"[\\w\\./]*+\"[\\s]+targetProject=\"[\\u4e00-\\u9fa5\\w\\.\\-:/\\\\]+\">","<javaModelGenerator targetPackage=\""+javaModelGenerator+"\" targetProject=\""+javaTargetProject+"\">");
+            generatorXmlStr = generatorXmlStr.replaceAll("<sqlMapGenerator[\\s]+targetPackage=\"[\\w\\./]*+\"[\\s]+targetProject=\"[\\u4e00-\\u9fa5\\w\\.\\-:/\\\\]+\">","<sqlMapGenerator targetPackage=\""+sqlMapGenerator+"\" targetProject=\""+sqlTargetProject+"\">");
+            generatorXmlStr = generatorXmlStr.replaceAll("<javaClientGenerator[\\s]+targetPackage=\"[\\w\\./]*+\"[\\s]+targetProject=\"[\\u4e00-\\u9fa5\\w\\.\\-:/\\\\]+\" type=\"XMLMAPPER\">","<javaClientGenerator targetPackage=\""+clientGenerator+"\" targetProject=\""+clientTargetProject+"\" type=\"XMLMAPPER\">");
             generatorXmlStr = generatorXmlStr.replaceAll("<table[\\s\\w=\">]+</table>","");
             generatorXmlStr = generatorXmlStr.replaceAll("javaClientGenerator>\\s+","javaClientGenerator>\n"+stringBuffer.toString()+"\n");
             //System.out.println("-----generatorXmlStr:"+generatorXmlStr);
@@ -371,7 +418,7 @@ public class OneUpdate {
                 unicode2=bufferedReader.read();
             }
             String runBatStr = stringBufferRun.toString();
-            runBatStr = runBatStr.replaceAll("java[\\s\\w-\\.:/\n]*-overwrite[\\sa-z\n]*","java -jar "+generatorPath+jarMybatis+" -configfile "+generatorPath+"generator.xml -overwrite\nexit");
+            runBatStr = runBatStr.replaceAll("java[\\s\\w\\-\\.:/\n\\\\]*-overwrite[\\sa-z\n]*","java -jar "+generatorPath+jarMybatis+" -configfile "+generatorPath+"generator.xml -overwrite\nexit");
             System.out.println("-----runBatStr:"+runBatStr);
             fileWriter = new FileWriter(runFile);
             bufferedWriter = new BufferedWriter(fileWriter);
@@ -413,15 +460,15 @@ public class OneUpdate {
     }
     //dao生成iservice,
     public void mapperToIService(Object... tableNames){
-        if(tableName==null){
+        if(this.tableName==null){
             if(tableNames[0]!=null){
                 setTableName(tableNames[0].toString());
             }
         }
-        if(tableNameArr==null){
-            tableNameArr = new String[tableNames.length];
+        if(this.tableNameArr==null){
+            this.tableNameArr = new String[tableNames.length];
             for (int i = 0; i <tableNames.length ; i++) {
-                tableNameArr[i]=StringIndex.upFirstWord(tableNames[i].toString());
+                tableNameArr[i]= StringIndex.upFirstWord(tableNames[i].toString());
             }
         }
         File daoFolderFile = new File(daoPath);
@@ -533,15 +580,15 @@ public class OneUpdate {
     }
     //iservice生成service
     public void iServiceToService(Object... tableNames){
-        if(tableName==null){
+        if(this.tableName==null){
             if(tableNames[0]!=null){
                 setTableName(tableNames[0].toString());
             }
         }
-        if(tableNameArr==null){
-            tableNameArr = new String[tableNames.length];
+        if(this.tableNameArr==null){
+            this.tableNameArr = new String[tableNames.length];
             for (int i = 0; i <tableNames.length ; i++) {
-                tableNameArr[i]=StringIndex.upFirstWord(tableNames[i].toString());
+                tableNameArr[i]= StringIndex.upFirstWord(tableNames[i].toString());
             }
         }
         File iServiceFolderFile = new File(iServicePath);
@@ -597,8 +644,8 @@ public class OneUpdate {
                                 int indexWithBLOBs = StringIndex.patternIndexOf(string,"WithBLOBs");
                                 if(indexWithBLOBs>0){
                                     String addStr = "    @Override\n" +
-                                            "    public int updateByPrimaryKeyWithBLOBs("+tableName+" "+StringIndex.lowerFirstWord(tableName)+") {\n" +
-                                            "        return "+StringIndex.lowerFirstWord(tableName)+daoLastName+".updateByPrimaryKeyWithBLOBs("+StringIndex.lowerFirstWord(tableName)+");\n" +
+                                            "    public int updateByPrimaryKeyWithBLOBs("+tableName+" "+ StringIndex.lowerFirstWord(tableName)+") {\n" +
+                                            "        return "+ StringIndex.lowerFirstWord(tableName)+daoLastName+".updateByPrimaryKeyWithBLOBs("+ StringIndex.lowerFirstWord(tableName)+");\n" +
                                             "    }\n";
                                     string = string.replaceAll("//WithBLOBs\n",addStr);
                                 }
@@ -767,21 +814,190 @@ public class OneUpdate {
             runbat();//重新生成实体类
         }
         try {
-            Thread.sleep(1000);//程序更新需要时间？使用join()无效！否则mapperFileStrArr获取不到generator()删除的daoMapper.java
+            Thread.sleep(2000);//程序更新需要时间？使用join()无效！否则mapperFileStrArr获取不到generator()删除的daoMapper.java，1秒不够，
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         mapperToIService();
         iServiceToService();
     }
-    public static void main(String[] args){
-        //手动配置好application.properties
+    //生成Controller
+    public void controller(String actionName,String groupId,String tableNames) throws IOException {
+        String tableName = "";
+        if(tableNames==null||"".equals(tableNames)){
+            tableNames = "s_role_permssion\n" +
+                    "s_role\n" +
+                    "credibilitylist\n" +
+                    "s_user_role\n" +
+                    "incomelist\n" +
+                    "s_permssion\n" +
+                    "accountlist\n" +
+                    "userinfo";
+        }
+        String strController = "package com.action;\n" +
+                "\n" +
+                "import com.alibaba.fastjson.JSON;\n" +
+                "import com.entity.T_user;\n" +
+                "import com.service.IT_userService;\n" +
+                "import com.utils.MapToBeanUtil;\n" +
+                "import org.springframework.stereotype.Controller;\n" +
+                "import org.springframework.web.bind.annotation.*;\n" +
+                "import org.springframework.web.context.ServletContextAware;\n" +
+                "import org.springframework.web.multipart.MultipartFile;\n" +
+                "\n" +
+                "import javax.annotation.Resource;\n" +
+                "import javax.servlet.ServletContext;\n" +
+                "import javax.servlet.http.HttpServletRequest;\n" +
+                "import java.io.File;\n" +
+                "import java.util.Iterator;\n" +
+                "import java.util.Map;\n" +
+                "\n" +
+                "@Controller\n" +
+                "public class T_userController implements ServletContextAware {\n" +
+                "    private static String primarynameKey = \"pidnamedjj\";\n" +
+                "    private ServletContext application;\n" +
+                "    @Resource\n" +
+                "    private IT_userService iT_userService;\n" +
+                "    @Override\n" +
+                "    public void setServletContext(ServletContext servletContext) {\n" +
+                "        this.application = servletContext;\n" +
+                "    }\n" +
+                "    @CrossOrigin\n" +
+                "    @ResponseBody\n" +
+                "    @RequestMapping(value = \"/t_userInsert\",produces = \"application/json;chart=UTF-8\")\n" +
+                "    public String t_userInsert(HttpServletRequest request, @RequestParam(required = false) Map<String,Object> params,@RequestParam(required = false) MultipartFile[] excelfiledjj){\n" +
+                "        System.out.println(\"-----params36:\"+params.toString());\n" +
+                "        Iterator iterator = params.keySet().iterator();\n" +
+                "        while (iterator.hasNext()){\n" +
+                "            String entryKey = iterator.next().toString();\n" +
+                "            if(entryKey.equals(\"driverNamedjj\")||entryKey.equals(\"datasourceUrldjj\")||entryKey.equals(\"userNamedjj\")||entryKey.equals(\"passworddjj\")||entryKey.equals(\"pronamedjj\")||entryKey.equals(\"tabnamedjj\")||entryKey.contains(\"pidnamedjj\")||entryKey.equals(\"acttypedjj\")||entryKey.equals(\"excelfiledjj\")){\n" +
+                "                iterator.remove();\n" +
+                "            }\n" +
+                "        }\n" +
+                "        T_user t_user = (T_user)MapToBeanUtil.backInstanceMapBean(new T_user(),params);\n" +
+                "        int i = iT_userService.insertSelective(t_user);\n" +
+                "        return JSON.toJSONString(i);\n" +
+                "    }\n" +
+                "    @CrossOrigin\n" +
+                "    @ResponseBody\n" +
+                "    @RequestMapping(value = \"/t_userDelete\",produces = \"application/json;chart=UTF-8\")\n" +
+                "    public String t_userDelete(HttpServletRequest request, @RequestParam(required = false) Map<String,Object> params){\n" +
+                "        System.out.println(\"-----params:\"+params.toString());\n" +
+                "        String primaryname = request.getParameter(primarynameKey+1);\n" +
+                "        String primaryval = params.get(primaryname).toString();\n" +
+                "        int i = iT_userService.deleteByPrimaryKey(Integer.valueOf(primaryval));\n" +
+                "        return JSON.toJSONString(i);\n" +
+                "    }\n" +
+                "    @CrossOrigin\n" +
+                "    @ResponseBody\n" +
+                "    @RequestMapping(value = \"/t_userUpdate\",produces = \"application/json;chart=UTF-8\")\n" +
+                "    public String t_userUpdate(HttpServletRequest request, @RequestParam(required = false) Map<String,Object> params,@RequestParam(required = false) MultipartFile[] excelfiledjj) throws Exception {\n" +
+                "        System.out.println(\"-----params:\"+params.toString());\n" +
+                "        String path = application.getRealPath(\"img\")+ File.separator;\n" +
+                "        System.out.println(\"-----img/product:\"+path);\n" +
+                "        //List<HashMap<String,Object>> mapList = PoiUtil.inxlsx(excelfiledjj);//把接收的文件中的数据转为listmap。\n" +
+                "        Iterator iterator = params.keySet().iterator();\n" +
+                "        while (iterator.hasNext()){\n" +
+                "            String entryKey = iterator.next().toString();\n" +
+                "            if(entryKey.equals(\"driverNamedjj\")||entryKey.equals(\"datasourceUrldjj\")||entryKey.equals(\"userNamedjj\")||entryKey.equals(\"passworddjj\")||entryKey.equals(\"pronamedjj\")||entryKey.equals(\"tabnamedjj\")||entryKey.contains(\"pidnamedjj\")||entryKey.equals(\"acttypedjj\")||entryKey.equals(\"excelfiledjj\")){\n" +
+                "                iterator.remove();\n" +
+                "            }\n" +
+                "        }\n" +
+                "        T_user t_user = (T_user) MapToBeanUtil.backInstanceMapBean(new T_user(),params);\n" +
+                "        int i = iT_userService.updateByPrimaryKeySelective(t_user);\n" +
+                "        return JSON.toJSONString(i);\n" +
+                "    }\n" +
+                "    @CrossOrigin\n" +
+                "    @ResponseBody\n" +
+                "    @RequestMapping(value = \"/t_userSelect\",produces = \"application/json;chart=UTF-8\")\n" +
+                "    public String t_userSelect(HttpServletRequest request, @RequestParam(required = false) Map<String,Object> params){\n" +
+                "        System.out.println(\"-----params:\"+params.toString());\n" +
+                "        String primaryname = request.getParameter(primarynameKey+1);\n" +
+                "        String primaryval = params.get(primaryname).toString();\n" +
+                "        T_user t_user = iT_userService.selectByPrimaryKey(Integer.valueOf(primaryval));\n" +
+                "        return JSON.toJSONString(t_user);\n" +
+                "    }\n" +
+                "}";
+        if(this.actionPath==null||"".equals(this.actionPath)){
+            if(this.oneUpdatePath==null||"".equals(this.oneUpdatePath)){
+                this.oneUpdatePath = this.oneUpdateURL.toString();
+                System.out.println("oneUpdateURLStr:"+oneUpdatePath);
+            }
+            this.oneUpdatePath=this.oneUpdatePath.replaceAll("file:/","");
+            this.oneUpdatePath=this.oneUpdatePath.replaceAll("target/classes","src/main/java");
+            //oneUpdatePath=D:/workspace/idea/guo/zufang/src/main/java/com/utils/
+            String utils = StringIndex.substringLastIndexOf(this.oneUpdatePath,"/",1,2);
+            this.actionPath = this.oneUpdatePath.replaceAll(utils, actionName);
+            File actionPathFolderFile = new File(this.actionPath);
+            //文件夹路径不存在
+            if (!actionPathFolderFile.exists() && !actionPathFolderFile.isDirectory()) {
+                actionPathFolderFile.mkdirs();
+                logger.info("文件夹路径不存在，创建路径:" + actionPath);
+            }
+            System.out.println("-----actionPath:"+this.actionPath);
+        }
+
+        File file = null;
+        FileWriter fileWriter = null;
+        BufferedWriter bufferedWriter = null;
+        StringBuffer stringBuffer = new StringBuffer(strController);
+
+        if(tableNames.contains("\n")){
+            String[] tableArr = tableNames.split("\n");
+            for (int i = 0; i <tableArr.length ; i++) {
+                tableArr[i]= StringIndex.upFirstWord(tableArr[i]);
+                tableName=tableArr[i];
+                String newStr = strController.replaceAll("T_user", StringIndex.upFirstWord(tableName));
+                newStr = newStr.replaceAll("t_user", StringIndex.lowerFirstWord(tableName));
+                newStr = newStr.replaceAll("com\\.",groupId+".");
+                String conPath = actionPath+"/"+ StringIndex.upFirstWord(tableName)+"Controller.java";
+                file = new File(conPath);
+                fileWriter = new FileWriter(file);
+                bufferedWriter = new BufferedWriter(fileWriter);
+                bufferedWriter.write(newStr);
+                bufferedWriter.flush();
+            }
+        }
+        else{
+            tableNames= StringIndex.upFirstWord(tableNames);
+            tableName=tableNames;
+            String newStr = strController.replaceAll("T_user", StringIndex.upFirstWord(tableName));
+            newStr = newStr.replaceAll("t_user", StringIndex.lowerFirstWord(tableName));
+            newStr = newStr.replaceAll("com\\.",groupId+".");
+            String conPath = actionPath+"/"+ StringIndex.upFirstWord(tableName)+"Controller.java";
+            file = new File(conPath);
+            fileWriter = new FileWriter(file);//能创建文件，不能创建文件夹。
+            bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(newStr);
+            bufferedWriter.flush();
+        }
+        bufferedWriter.close();
+        fileWriter.close();
+
+    }
+    public static void main(String[] args) throws IOException {
+        //手动配置好config.properties
         //String daoFolderName,String daoLastName,String serviceFolderName,Object... tableNames
-        String tableStr="zudan";
-        //执行前，必须先生成target,否则无法获取路径
-        OneUpdate oneUpdate = new OneUpdate("application.properties","mysql-connector-java-5.1.20.jar", "dao","Mapper", "service","impl",true,tableStr);
-//        oneUpdate.mapperToIService();
-//        oneUpdate.iServiceToService();
-        oneUpdate.runFun();//最后输出-----serviceFile，表示运行成功
+//        String tableStr="t_decisemanagetable\n" + "t_flatequip_correspond";
+        String tableStr = "s_role_permssion\n" +
+                "s_role\n" +
+                "credibilitylist\n" +
+                "s_user_role\n" +
+                "incomelist\n" +
+                "s_permssion\n" +
+                "accountlist\n" +
+                "userinfo";
+        //读取配置文件值https://blog.csdn.net/jiangyu1013/article/details/82188593,能读a.bc=3和a.c: 4格式，不分yml或properties。但是不支持getProperty读取不在同一行的bootstrap.yml格式！
+        //执行前，必须先build生成target,否则无法获取路径，使用mysql5，不要用6和8.要改配置。
+        //OneUpdate oneUpdate = new OneUpdate("config.properties","mysql-connector-java-5.1.20.jar", "dao","Mapper", "service","impl",true,tableStr);
+        OneUpdate oneUpdate = new OneUpdate("config.properties","mysql-connector-java-5.1.20.jar", "dao","entity","Mapper", "service","impl",true,tableStr);
+        //根据传入的表(一个或多个)进行重新生成该表的相关信息，tableNames在调用时指定.
+        oneUpdate.runFun();//最后输出-----serviceFile，生成xml配置文件，生成实体类，生成服务接口，实现接口，可拆分执行。
+
+        //生成controller,只调用其中的一个方法。生成最后的控制层，前面的注消。//不需要依赖其它属性，因些不初始化有参构造。
+//        OneUpdate oneUpdate = new OneUpdate();
+        //oneUpdate.controller("D:\\workspace\\idea\\springcloud\\f8xn\\autof8\\src\\main\\java\\com\\action","t_decisemanagetable");
+        //可以不指定actionPath,tableNames要么在方法里指定，要么调用时指定.
+        oneUpdate.controller("action","com",tableStr);
     }
 }

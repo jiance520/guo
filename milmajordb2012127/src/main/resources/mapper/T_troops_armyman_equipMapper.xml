@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.T_troops_armyman_equipMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.T_troops_armyman_equip" >
+    <id column="armyman_id" property="armymanId" jdbcType="INTEGER" />
+    <id column="aw_equip_id" property="awEquipId" jdbcType="INTEGER" />
+    <result column="aw_equip_name" property="awEquipName" jdbcType="VARCHAR" />
+    <result column="aw_equip_number" property="awEquipNumber" jdbcType="INTEGER" />
+    <result column="aw_equip_type" property="awEquipType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    armyman_id, aw_equip_id, aw_equip_name, aw_equip_number, aw_equip_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_troops_armyman_equip
+    <where>
+      <if test="armymanId != null">
+        armyman_id = #{armymanId,jdbcType=INTEGER}
+      </if>
+      <if test="awEquipId != null">
+        and aw_equip_id = #{awEquipId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from t_troops_armyman_equip
+    <where>
+      <if test="armymanId != null">
+        armyman_id = #{armymanId,jdbcType=INTEGER}
+      </if>
+      <if test="awEquipId != null">
+        and aw_equip_id = #{awEquipId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </delete>
+  <insert id="insert" parameterType="guo.entity.T_troops_armyman_equip" >
+    insert into t_troops_armyman_equip (armyman_id, aw_equip_id, aw_equip_name, 
+      aw_equip_number, aw_equip_type)
+    values (#{armymanId,jdbcType=INTEGER}, #{awEquipId,jdbcType=INTEGER}, #{awEquipName,jdbcType=VARCHAR}, 
+      #{awEquipNumber,jdbcType=INTEGER}, #{awEquipType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.T_troops_armyman_equip" >
+    insert into t_troops_armyman_equip
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="armymanId != null" >
+        armyman_id,
+      </if>
+      <if test="awEquipId != null" >
+        aw_equip_id,
+      </if>
+      <if test="awEquipName != null" >
+        aw_equip_name,
+      </if>
+      <if test="awEquipNumber != null" >
+        aw_equip_number,
+      </if>
+      <if test="awEquipType != null" >
+        aw_equip_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="armymanId != null" >
+        #{armymanId,jdbcType=INTEGER},
+      </if>
+      <if test="awEquipId != null" >
+        #{awEquipId,jdbcType=INTEGER},
+      </if>
+      <if test="awEquipName != null" >
+        #{awEquipName,jdbcType=VARCHAR},
+      </if>
+      <if test="awEquipNumber != null" >
+        #{awEquipNumber,jdbcType=INTEGER},
+      </if>
+      <if test="awEquipType != null" >
+        #{awEquipType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.T_troops_armyman_equip" >
+    update t_troops_armyman_equip
+    <set >
+      <if test="awEquipName != null" >
+        aw_equip_name = #{awEquipName,jdbcType=VARCHAR},
+      </if>
+      <if test="awEquipNumber != null" >
+        aw_equip_number = #{awEquipNumber,jdbcType=INTEGER},
+      </if>
+      <if test="awEquipType != null" >
+        aw_equip_type = #{awEquipType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where armyman_id = #{armymanId,jdbcType=INTEGER}
+      and aw_equip_id = #{awEquipId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.T_troops_armyman_equip" >
+    update t_troops_armyman_equip
+    set aw_equip_name = #{awEquipName,jdbcType=VARCHAR},
+      aw_equip_number = #{awEquipNumber,jdbcType=INTEGER},
+      aw_equip_type = #{awEquipType,jdbcType=INTEGER}
+    where armyman_id = #{armymanId,jdbcType=INTEGER}
+      and aw_equip_id = #{awEquipId,jdbcType=INTEGER}
+  </update>
+</mapper>

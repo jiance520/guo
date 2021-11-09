@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.作战力量管理表Mapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.作战力量管理表" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <id column="力量编号" property="力量编号" jdbcType="INTEGER" />
+    <result column="阵营" property="阵营" jdbcType="INTEGER" />
+    <result column="名称" property="名称" jdbcType="CHAR" />
+    <result column="描述" property="描述" jdbcType="CHAR" />
+    <result column="作者" property="作者" jdbcType="CHAR" />
+    <result column="编制时间" property="编制时间" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID,力量编号,阵营,名称,描述,作者,编制时间
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from 作战力量管理表
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from 作战力量管理表
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from 作战力量管理表
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.作战力量管理表" >
+    insert into 作战力量管理表 (ID, 力量编号, 阵营, 
+      名称, 描述, 作者,编制时间
+      )
+    values (#{ID,jdbcType=INTEGER}, #{力量编号,jdbcType=INTEGER}, #{阵营,jdbcType=INTEGER},
+      #{名称,jdbcType=CHAR}, #{描述,jdbcType=CHAR}, #{作者,jdbcType=CHAR}, #{编制时间,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.作战力量管理表" useGeneratedKeys="true" keyProperty="ID">
+    insert into 作战力量管理表
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="力量编号 != null" >
+        力量编号,
+      </if>
+      <if test="阵营 != null" >
+        阵营,
+      </if>
+      <if test="名称 != null" >
+        名称,
+      </if>
+      <if test="描述 != null" >
+        描述,
+      </if>
+      <if test="作者 != null" >
+        作者,
+      </if>
+      <if test="编制时间 != null" >
+        编制时间,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="力量编号 != null" >
+        #{力量编号,jdbcType=INTEGER},
+      </if>
+      <if test="阵营 != null" >
+        #{阵营,jdbcType=INTEGER},
+      </if>
+      <if test="名称 != null" >
+        #{名称,jdbcType=CHAR},
+      </if>
+      <if test="描述 != null" >
+        #{描述,jdbcType=CHAR},
+      </if>
+      <if test="作者 != null" >
+        #{作者,jdbcType=CHAR},
+      </if>
+      <if test="编制时间 != null" >
+        #{编制时间,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.作战力量管理表" >
+    update 作战力量管理表
+    <set >
+      <if test="力量编号 != null" >
+        力量编号 = #{力量编号,jdbcType=INTEGER},
+      </if>
+      <if test="阵营 != null" >
+        阵营 = #{阵营,jdbcType=INTEGER},
+      </if>
+      <if test="名称 != null" >
+        名称 = #{名称,jdbcType=CHAR},
+      </if>
+      <if test="描述 != null" >
+        描述 = #{描述,jdbcType=CHAR},
+      </if>
+      <if test="作者 != null" >
+        作者 = #{作者,jdbcType=CHAR},
+      </if>
+      <if test="编制时间 != null" >
+        编制时间 = #{编制时间,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.作战力量管理表" >
+    update 作战力量管理表
+    set 力量编号 = #{力量编号,jdbcType=INTEGER},
+      阵营 = #{阵营,jdbcType=INTEGER},
+      名称 = #{名称,jdbcType=CHAR},
+      描述 = #{描述,jdbcType=CHAR},
+      作者 = #{作者,jdbcType=CHAR}
+      编制时间 = #{编制时间,jdbcType=TIMESTAMP}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.T_gun_shootstraight_tableMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.T_gun_shootstraight_table" >
+    <id column="SerialNumber" property="serialnumber" jdbcType="INTEGER" />
+    <result column="w_info_id" property="wInfoId" jdbcType="INTEGER" />
+    <result column="w_info_name" property="wInfoName" jdbcType="VARCHAR" />
+    <result column="w_info_fire_distance" property="wInfoFireDistance" jdbcType="INTEGER" />
+    <result column="w_info_fire_way" property="wInfoFireWay" jdbcType="INTEGER" />
+    <result column="w_info_target_type" property="wInfoTargetType" jdbcType="INTEGER" />
+    <result column="w_info_hit_probability" property="wInfoHitProbability" jdbcType="DOUBLE" />
+    <result column="w_info_hit_probability_switch" property="wInfoHitProbabilitySwitch" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SerialNumber, w_info_id, w_info_name, w_info_fire_distance, w_info_fire_way, w_info_target_type, 
+    w_info_hit_probability, w_info_hit_probability_switch
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from T_gun_shootstraight_table
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_gun_shootstraight_table
+    where SerialNumber = #{serialnumber,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_gun_shootstraight_table
+    where SerialNumber = #{serialnumber,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.T_gun_shootstraight_table" >
+    insert into t_gun_shootstraight_table (SerialNumber, w_info_id, w_info_name, 
+      w_info_fire_distance, w_info_fire_way, w_info_target_type, 
+      w_info_hit_probability, w_info_hit_probability_switch
+      )
+    values (#{serialnumber,jdbcType=INTEGER}, #{wInfoId,jdbcType=INTEGER}, #{wInfoName,jdbcType=VARCHAR}, 
+      #{wInfoFireDistance,jdbcType=INTEGER}, #{wInfoFireWay,jdbcType=INTEGER}, #{wInfoTargetType,jdbcType=INTEGER}, 
+      #{wInfoHitProbability,jdbcType=DOUBLE}, #{wInfoHitProbabilitySwitch,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.T_gun_shootstraight_table" useGeneratedKeys="true" keyProperty="serialnumber">
+    insert into t_gun_shootstraight_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serialnumber != null" >
+        SerialNumber,
+      </if>
+      <if test="wInfoId != null" >
+        w_info_id,
+      </if>
+      <if test="wInfoName != null" >
+        w_info_name,
+      </if>
+      <if test="wInfoFireDistance != null" >
+        w_info_fire_distance,
+      </if>
+      <if test="wInfoFireWay != null" >
+        w_info_fire_way,
+      </if>
+      <if test="wInfoTargetType != null" >
+        w_info_target_type,
+      </if>
+      <if test="wInfoHitProbability != null" >
+        w_info_hit_probability,
+      </if>
+      <if test="wInfoHitProbabilitySwitch != null" >
+        w_info_hit_probability_switch,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serialnumber != null" >
+        #{serialnumber,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoId != null" >
+        #{wInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoName != null" >
+        #{wInfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="wInfoFireDistance != null" >
+        #{wInfoFireDistance,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoFireWay != null" >
+        #{wInfoFireWay,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoTargetType != null" >
+        #{wInfoTargetType,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoHitProbability != null" >
+        #{wInfoHitProbability,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoHitProbabilitySwitch != null" >
+        #{wInfoHitProbabilitySwitch,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.T_gun_shootstraight_table" >
+    update t_gun_shootstraight_table
+    <set >
+      <if test="wInfoId != null" >
+        w_info_id = #{wInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoName != null" >
+        w_info_name = #{wInfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="wInfoFireDistance != null" >
+        w_info_fire_distance = #{wInfoFireDistance,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoFireWay != null" >
+        w_info_fire_way = #{wInfoFireWay,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoTargetType != null" >
+        w_info_target_type = #{wInfoTargetType,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoHitProbability != null" >
+        w_info_hit_probability = #{wInfoHitProbability,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoHitProbabilitySwitch != null" >
+        w_info_hit_probability_switch = #{wInfoHitProbabilitySwitch,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where SerialNumber = #{serialnumber,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.T_gun_shootstraight_table" >
+    update t_gun_shootstraight_table
+    set w_info_id = #{wInfoId,jdbcType=INTEGER},
+      w_info_name = #{wInfoName,jdbcType=VARCHAR},
+      w_info_fire_distance = #{wInfoFireDistance,jdbcType=INTEGER},
+      w_info_fire_way = #{wInfoFireWay,jdbcType=INTEGER},
+      w_info_target_type = #{wInfoTargetType,jdbcType=INTEGER},
+      w_info_hit_probability = #{wInfoHitProbability,jdbcType=DOUBLE},
+      w_info_hit_probability_switch = #{wInfoHitProbabilitySwitch,jdbcType=DOUBLE}
+    where SerialNumber = #{serialnumber,jdbcType=INTEGER}
+  </update>
+</mapper>

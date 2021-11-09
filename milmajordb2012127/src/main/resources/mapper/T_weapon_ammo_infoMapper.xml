@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.T_weapon_ammo_infoMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.T_weapon_ammo_info" >
+    <id column="w_info_id" property="wInfoId" jdbcType="INTEGER" />
+    <result column="w_info_name" property="wInfoName" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="w_info_model_id" property="wInfoModelId" jdbcType="VARCHAR" />
+    <result column="w_info_shot_length" property="wInfoShotLength" jdbcType="INTEGER" />
+    <result column="w_info_shot_weight" property="wInfoShotWeight" jdbcType="DOUBLE" />
+    <result column="w_info_detonator_weight" property="wInfoDetonatorWeight" jdbcType="DOUBLE" />
+    <result column="w_info_explode_radius" property="wInfoExplodeRadius" jdbcType="DOUBLE" />
+    <result column="w_info_kill_radius" property="wInfoKillRadius" jdbcType="DOUBLE" />
+    <result column="w_info_rift_thickness" property="wInfoRiftThickness" jdbcType="INTEGER" />
+    <result column="w_info_made" property="wInfoMade" jdbcType="INTEGER" />
+    <result column="w_info_campaign_f" property="wInfoCampaignF" jdbcType="INTEGER" />
+    <result column="w_info_footman_firepower" property="wInfoFootmanFirepower" jdbcType="DOUBLE" />
+    <result column="w_info_armor_firepower" property="wInfoArmorFirepower" jdbcType="DOUBLE" />
+    <result column="w_info_air_firepower" property="wInfoAirFirepower" jdbcType="DOUBLE" />
+    <result column="w_info_work_firepower" property="wInfoWorkFirepower" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    w_info_id, w_info_name, type_id, w_info_model_id, w_info_shot_length, w_info_shot_weight, 
+    w_info_detonator_weight, w_info_explode_radius, w_info_kill_radius, w_info_rift_thickness, 
+    w_info_made, w_info_campaign_f, w_info_footman_firepower, w_info_armor_firepower, 
+    w_info_air_firepower, w_info_work_firepower
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from T_weapon_ammo_info
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_weapon_ammo_info
+    where w_info_id = #{wInfoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_weapon_ammo_info
+    where w_info_id = #{wInfoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.T_weapon_ammo_info" >
+    insert into t_weapon_ammo_info (w_info_id, w_info_name, type_id, 
+      w_info_model_id, w_info_shot_length, w_info_shot_weight, 
+      w_info_detonator_weight, w_info_explode_radius, 
+      w_info_kill_radius, w_info_rift_thickness, w_info_made, 
+      w_info_campaign_f, w_info_footman_firepower, w_info_armor_firepower, 
+      w_info_air_firepower, w_info_work_firepower)
+    values (#{wInfoId,jdbcType=INTEGER}, #{wInfoName,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, 
+      #{wInfoModelId,jdbcType=VARCHAR}, #{wInfoShotLength,jdbcType=INTEGER}, #{wInfoShotWeight,jdbcType=DOUBLE}, 
+      #{wInfoDetonatorWeight,jdbcType=DOUBLE}, #{wInfoExplodeRadius,jdbcType=DOUBLE}, 
+      #{wInfoKillRadius,jdbcType=DOUBLE}, #{wInfoRiftThickness,jdbcType=INTEGER}, #{wInfoMade,jdbcType=INTEGER}, 
+      #{wInfoCampaignF,jdbcType=INTEGER}, #{wInfoFootmanFirepower,jdbcType=DOUBLE}, #{wInfoArmorFirepower,jdbcType=DOUBLE}, 
+      #{wInfoAirFirepower,jdbcType=DOUBLE}, #{wInfoWorkFirepower,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.T_weapon_ammo_info">
+    insert into t_weapon_ammo_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wInfoId != null" >
+        w_info_id,
+      </if>
+      <if test="wInfoName != null" >
+        w_info_name,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="wInfoModelId != null" >
+        w_info_model_id,
+      </if>
+      <if test="wInfoShotLength != null" >
+        w_info_shot_length,
+      </if>
+      <if test="wInfoShotWeight != null" >
+        w_info_shot_weight,
+      </if>
+      <if test="wInfoDetonatorWeight != null" >
+        w_info_detonator_weight,
+      </if>
+      <if test="wInfoExplodeRadius != null" >
+        w_info_explode_radius,
+      </if>
+      <if test="wInfoKillRadius != null" >
+        w_info_kill_radius,
+      </if>
+      <if test="wInfoRiftThickness != null" >
+        w_info_rift_thickness,
+      </if>
+      <if test="wInfoMade != null" >
+        w_info_made,
+      </if>
+      <if test="wInfoCampaignF != null" >
+        w_info_campaign_f,
+      </if>
+      <if test="wInfoFootmanFirepower != null" >
+        w_info_footman_firepower,
+      </if>
+      <if test="wInfoArmorFirepower != null" >
+        w_info_armor_firepower,
+      </if>
+      <if test="wInfoAirFirepower != null" >
+        w_info_air_firepower,
+      </if>
+      <if test="wInfoWorkFirepower != null" >
+        w_info_work_firepower,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wInfoId != null" >
+        #{wInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoName != null" >
+        #{wInfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoModelId != null" >
+        #{wInfoModelId,jdbcType=VARCHAR},
+      </if>
+      <if test="wInfoShotLength != null" >
+        #{wInfoShotLength,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoShotWeight != null" >
+        #{wInfoShotWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoDetonatorWeight != null" >
+        #{wInfoDetonatorWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoExplodeRadius != null" >
+        #{wInfoExplodeRadius,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoKillRadius != null" >
+        #{wInfoKillRadius,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoRiftThickness != null" >
+        #{wInfoRiftThickness,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoMade != null" >
+        #{wInfoMade,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoCampaignF != null" >
+        #{wInfoCampaignF,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoFootmanFirepower != null" >
+        #{wInfoFootmanFirepower,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoArmorFirepower != null" >
+        #{wInfoArmorFirepower,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoAirFirepower != null" >
+        #{wInfoAirFirepower,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoWorkFirepower != null" >
+        #{wInfoWorkFirepower,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.T_weapon_ammo_info" >
+    update t_weapon_ammo_info
+    <set >
+      <if test="wInfoName != null" >
+        w_info_name = #{wInfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoModelId != null" >
+        w_info_model_id = #{wInfoModelId,jdbcType=VARCHAR},
+      </if>
+      <if test="wInfoShotLength != null" >
+        w_info_shot_length = #{wInfoShotLength,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoShotWeight != null" >
+        w_info_shot_weight = #{wInfoShotWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoDetonatorWeight != null" >
+        w_info_detonator_weight = #{wInfoDetonatorWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoExplodeRadius != null" >
+        w_info_explode_radius = #{wInfoExplodeRadius,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoKillRadius != null" >
+        w_info_kill_radius = #{wInfoKillRadius,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoRiftThickness != null" >
+        w_info_rift_thickness = #{wInfoRiftThickness,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoMade != null" >
+        w_info_made = #{wInfoMade,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoCampaignF != null" >
+        w_info_campaign_f = #{wInfoCampaignF,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoFootmanFirepower != null" >
+        w_info_footman_firepower = #{wInfoFootmanFirepower,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoArmorFirepower != null" >
+        w_info_armor_firepower = #{wInfoArmorFirepower,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoAirFirepower != null" >
+        w_info_air_firepower = #{wInfoAirFirepower,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoWorkFirepower != null" >
+        w_info_work_firepower = #{wInfoWorkFirepower,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where w_info_id = #{wInfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.T_weapon_ammo_info" >
+    update t_weapon_ammo_info
+    set w_info_name = #{wInfoName,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      w_info_model_id = #{wInfoModelId,jdbcType=VARCHAR},
+      w_info_shot_length = #{wInfoShotLength,jdbcType=INTEGER},
+      w_info_shot_weight = #{wInfoShotWeight,jdbcType=DOUBLE},
+      w_info_detonator_weight = #{wInfoDetonatorWeight,jdbcType=DOUBLE},
+      w_info_explode_radius = #{wInfoExplodeRadius,jdbcType=DOUBLE},
+      w_info_kill_radius = #{wInfoKillRadius,jdbcType=DOUBLE},
+      w_info_rift_thickness = #{wInfoRiftThickness,jdbcType=INTEGER},
+      w_info_made = #{wInfoMade,jdbcType=INTEGER},
+      w_info_campaign_f = #{wInfoCampaignF,jdbcType=INTEGER},
+      w_info_footman_firepower = #{wInfoFootmanFirepower,jdbcType=DOUBLE},
+      w_info_armor_firepower = #{wInfoArmorFirepower,jdbcType=DOUBLE},
+      w_info_air_firepower = #{wInfoAirFirepower,jdbcType=DOUBLE},
+      w_info_work_firepower = #{wInfoWorkFirepower,jdbcType=DOUBLE}
+    where w_info_id = #{wInfoId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.T_trajectory_dataMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.T_trajectory_data" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="p_info_fire_distance" property="pInfoFireDistance" jdbcType="SMALLINT" />
+    <result column="p_info_GaoJiao" property="pInfoGaojiao" jdbcType="REAL" />
+    <result column="p_info_Cb" property="pInfoCb" jdbcType="REAL" />
+    <result column="p_info_yh" property="pInfoYh" jdbcType="SMALLINT" />
+    <result column="Ju10" property="ju10" jdbcType="REAL" />
+    <result column="p_info_distance_error" property="pInfoDistanceError" jdbcType="REAL" />
+    <result column="p_info_orientation_error" property="pInfoOrientationError" jdbcType="REAL" />
+    <result column="p_info_id" property="pInfoId" jdbcType="INTEGER" />
+    <result column="p_info_name" property="pInfoName" jdbcType="VARCHAR" />
+    <result column="p_info_type" property="pInfoType" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, p_info_fire_distance, p_info_GaoJiao, p_info_Cb, p_info_yh, Ju10, p_info_distance_error, 
+    p_info_orientation_error, p_info_id, p_info_name, p_info_type
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from T_trajectory_data
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_trajectory_data
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_trajectory_data
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.T_trajectory_data" >
+    insert into t_trajectory_data (ID, p_info_fire_distance, p_info_GaoJiao, 
+      p_info_Cb, p_info_yh, Ju10, 
+      p_info_distance_error, p_info_orientation_error, p_info_id, 
+      p_info_name, p_info_type)
+    values (#{id,jdbcType=INTEGER}, #{pInfoFireDistance,jdbcType=SMALLINT}, #{pInfoGaojiao,jdbcType=REAL}, 
+      #{pInfoCb,jdbcType=REAL}, #{pInfoYh,jdbcType=SMALLINT}, #{ju10,jdbcType=REAL}, 
+      #{pInfoDistanceError,jdbcType=REAL}, #{pInfoOrientationError,jdbcType=REAL}, #{pInfoId,jdbcType=INTEGER}, 
+      #{pInfoName,jdbcType=VARCHAR}, #{pInfoType,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.T_trajectory_data" useGeneratedKeys="true" keyProperty="id">
+    insert into t_trajectory_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="pInfoFireDistance != null" >
+        p_info_fire_distance,
+      </if>
+      <if test="pInfoGaojiao != null" >
+        p_info_GaoJiao,
+      </if>
+      <if test="pInfoCb != null" >
+        p_info_Cb,
+      </if>
+      <if test="pInfoYh != null" >
+        p_info_yh,
+      </if>
+      <if test="ju10 != null" >
+        Ju10,
+      </if>
+      <if test="pInfoDistanceError != null" >
+        p_info_distance_error,
+      </if>
+      <if test="pInfoOrientationError != null" >
+        p_info_orientation_error,
+      </if>
+      <if test="pInfoId != null" >
+        p_info_id,
+      </if>
+      <if test="pInfoName != null" >
+        p_info_name,
+      </if>
+      <if test="pInfoType != null" >
+        p_info_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pInfoFireDistance != null" >
+        #{pInfoFireDistance,jdbcType=SMALLINT},
+      </if>
+      <if test="pInfoGaojiao != null" >
+        #{pInfoGaojiao,jdbcType=REAL},
+      </if>
+      <if test="pInfoCb != null" >
+        #{pInfoCb,jdbcType=REAL},
+      </if>
+      <if test="pInfoYh != null" >
+        #{pInfoYh,jdbcType=SMALLINT},
+      </if>
+      <if test="ju10 != null" >
+        #{ju10,jdbcType=REAL},
+      </if>
+      <if test="pInfoDistanceError != null" >
+        #{pInfoDistanceError,jdbcType=REAL},
+      </if>
+      <if test="pInfoOrientationError != null" >
+        #{pInfoOrientationError,jdbcType=REAL},
+      </if>
+      <if test="pInfoId != null" >
+        #{pInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="pInfoName != null" >
+        #{pInfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="pInfoType != null" >
+        #{pInfoType,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.T_trajectory_data" >
+    update t_trajectory_data
+    <set >
+      <if test="pInfoFireDistance != null" >
+        p_info_fire_distance = #{pInfoFireDistance,jdbcType=SMALLINT},
+      </if>
+      <if test="pInfoGaojiao != null" >
+        p_info_GaoJiao = #{pInfoGaojiao,jdbcType=REAL},
+      </if>
+      <if test="pInfoCb != null" >
+        p_info_Cb = #{pInfoCb,jdbcType=REAL},
+      </if>
+      <if test="pInfoYh != null" >
+        p_info_yh = #{pInfoYh,jdbcType=SMALLINT},
+      </if>
+      <if test="ju10 != null" >
+        Ju10 = #{ju10,jdbcType=REAL},
+      </if>
+      <if test="pInfoDistanceError != null" >
+        p_info_distance_error = #{pInfoDistanceError,jdbcType=REAL},
+      </if>
+      <if test="pInfoOrientationError != null" >
+        p_info_orientation_error = #{pInfoOrientationError,jdbcType=REAL},
+      </if>
+      <if test="pInfoId != null" >
+        p_info_id = #{pInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="pInfoName != null" >
+        p_info_name = #{pInfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="pInfoType != null" >
+        p_info_type = #{pInfoType,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.T_trajectory_data" >
+    update t_trajectory_data
+    set p_info_fire_distance = #{pInfoFireDistance,jdbcType=SMALLINT},
+      p_info_GaoJiao = #{pInfoGaojiao,jdbcType=REAL},
+      p_info_Cb = #{pInfoCb,jdbcType=REAL},
+      p_info_yh = #{pInfoYh,jdbcType=SMALLINT},
+      Ju10 = #{ju10,jdbcType=REAL},
+      p_info_distance_error = #{pInfoDistanceError,jdbcType=REAL},
+      p_info_orientation_error = #{pInfoOrientationError,jdbcType=REAL},
+      p_info_id = #{pInfoId,jdbcType=INTEGER},
+      p_info_name = #{pInfoName,jdbcType=VARCHAR},
+      p_info_type = #{pInfoType,jdbcType=SMALLINT}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

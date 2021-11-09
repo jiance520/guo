@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.T_troops_commandershipMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.T_troops_commandership" >
+    <id column="commandership_id" property="commandershipId" jdbcType="INTEGER" />
+    <result column="commandership_name" property="commandershipName" jdbcType="VARCHAR" />
+    <result column="commandership_description" property="commandershipDescription" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    commandership_id, commandership_name, commandership_description
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from T_troops_commandership
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_troops_commandership
+    where commandership_id = #{commandershipId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_troops_commandership
+    where commandership_id = #{commandershipId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.T_troops_commandership" >
+    insert into t_troops_commandership (commandership_id, commandership_name, 
+      commandership_description)
+    values (#{commandershipId,jdbcType=INTEGER}, #{commandershipName,jdbcType=VARCHAR}, 
+      #{commandershipDescription,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.T_troops_commandership" useGeneratedKeys="true" keyProperty="commandershipId">
+    insert into t_troops_commandership
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commandershipId != null" >
+        commandership_id,
+      </if>
+      <if test="commandershipName != null" >
+        commandership_name,
+      </if>
+      <if test="commandershipDescription != null" >
+        commandership_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commandershipId != null" >
+        #{commandershipId,jdbcType=INTEGER},
+      </if>
+      <if test="commandershipName != null" >
+        #{commandershipName,jdbcType=VARCHAR},
+      </if>
+      <if test="commandershipDescription != null" >
+        #{commandershipDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.T_troops_commandership" >
+    update t_troops_commandership
+    <set >
+      <if test="commandershipName != null" >
+        commandership_name = #{commandershipName,jdbcType=VARCHAR},
+      </if>
+      <if test="commandershipDescription != null" >
+        commandership_description = #{commandershipDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where commandership_id = #{commandershipId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.T_troops_commandership" >
+    update t_troops_commandership
+    set commandership_name = #{commandershipName,jdbcType=VARCHAR},
+      commandership_description = #{commandershipDescription,jdbcType=VARCHAR}
+    where commandership_id = #{commandershipId,jdbcType=INTEGER}
+  </update>
+</mapper>

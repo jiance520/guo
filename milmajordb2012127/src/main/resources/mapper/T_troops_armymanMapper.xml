@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.T_troops_armymanMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.T_troops_armyman" >
+    <id column="armyman_id" property="armymanId" jdbcType="INTEGER" />
+    <result column="armyman_name" property="armymanName" jdbcType="VARCHAR" />
+    <result column="armyman_description" property="armymanDescription" jdbcType="VARCHAR" />
+    <result column="aw_info_campaign_f" property="awInfoCampaignF" jdbcType="INTEGER" />
+    <result column="aw_info_unit_type" property="awInfoUnitType" jdbcType="INTEGER" />
+    <result column="aq_info_unit_level" property="aqInfoUnitLevel" jdbcType="INTEGER" />
+    <result column="armyman_rank_id" property="armymanRankId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    armyman_id, armyman_name, armyman_description, aw_info_campaign_f, aw_info_unit_type, 
+    aq_info_unit_level, armyman_rank_id
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from T_troops_armyman
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_troops_armyman
+    where armyman_id = #{armymanId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_troops_armyman
+    where armyman_id = #{armymanId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.T_troops_armyman" >
+    insert into t_troops_armyman (armyman_id, armyman_name, armyman_description, 
+      aw_info_campaign_f, aw_info_unit_type, aq_info_unit_level, 
+      armyman_rank_id)
+    values (#{armymanId,jdbcType=INTEGER}, #{armymanName,jdbcType=VARCHAR}, #{armymanDescription,jdbcType=VARCHAR}, 
+      #{awInfoCampaignF,jdbcType=INTEGER}, #{awInfoUnitType,jdbcType=INTEGER}, #{aqInfoUnitLevel,jdbcType=INTEGER}, 
+      #{armymanRankId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.T_troops_armyman" useGeneratedKeys="true" keyProperty="armymanId">
+    insert into t_troops_armyman
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="armymanId != null" >
+        armyman_id,
+      </if>
+      <if test="armymanName != null" >
+        armyman_name,
+      </if>
+      <if test="armymanDescription != null" >
+        armyman_description,
+      </if>
+      <if test="awInfoCampaignF != null" >
+        aw_info_campaign_f,
+      </if>
+      <if test="awInfoUnitType != null" >
+        aw_info_unit_type,
+      </if>
+      <if test="aqInfoUnitLevel != null" >
+        aq_info_unit_level,
+      </if>
+      <if test="armymanRankId != null" >
+        armyman_rank_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="armymanId != null" >
+        #{armymanId,jdbcType=INTEGER},
+      </if>
+      <if test="armymanName != null" >
+        #{armymanName,jdbcType=VARCHAR},
+      </if>
+      <if test="armymanDescription != null" >
+        #{armymanDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="awInfoCampaignF != null" >
+        #{awInfoCampaignF,jdbcType=INTEGER},
+      </if>
+      <if test="awInfoUnitType != null" >
+        #{awInfoUnitType,jdbcType=INTEGER},
+      </if>
+      <if test="aqInfoUnitLevel != null" >
+        #{aqInfoUnitLevel,jdbcType=INTEGER},
+      </if>
+      <if test="armymanRankId != null" >
+        #{armymanRankId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.T_troops_armyman" >
+    update t_troops_armyman
+    <set >
+      <if test="armymanName != null" >
+        armyman_name = #{armymanName,jdbcType=VARCHAR},
+      </if>
+      <if test="armymanDescription != null" >
+        armyman_description = #{armymanDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="awInfoCampaignF != null" >
+        aw_info_campaign_f = #{awInfoCampaignF,jdbcType=INTEGER},
+      </if>
+      <if test="awInfoUnitType != null" >
+        aw_info_unit_type = #{awInfoUnitType,jdbcType=INTEGER},
+      </if>
+      <if test="aqInfoUnitLevel != null" >
+        aq_info_unit_level = #{aqInfoUnitLevel,jdbcType=INTEGER},
+      </if>
+      <if test="armymanRankId != null" >
+        armyman_rank_id = #{armymanRankId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where armyman_id = #{armymanId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.T_troops_armyman" >
+    update t_troops_armyman
+    set armyman_name = #{armymanName,jdbcType=VARCHAR},
+      armyman_description = #{armymanDescription,jdbcType=VARCHAR},
+      aw_info_campaign_f = #{awInfoCampaignF,jdbcType=INTEGER},
+      aw_info_unit_type = #{awInfoUnitType,jdbcType=INTEGER},
+      aq_info_unit_level = #{aqInfoUnitLevel,jdbcType=INTEGER},
+      armyman_rank_id = #{armymanRankId,jdbcType=INTEGER}
+    where armyman_id = #{armymanId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.T_weapon_gun_infoMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.T_weapon_gun_info" >
+    <id column="w_info_id" property="wInfoId" jdbcType="INTEGER" />
+    <result column="w_info_name" property="wInfoName" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="w_info_model_id" property="wInfoModelId" jdbcType="VARCHAR" />
+    <result column="w_info_gun_type" property="wInfoGunType" jdbcType="INTEGER" />
+    <result column="w_info_gun_caliber" property="wInfoGunCaliber" jdbcType="DOUBLE" />
+    <result column="w_info_gun_length" property="wInfoGunLength" jdbcType="INTEGER" />
+    <result column="w_info_chamber_length" property="wInfoChamberLength" jdbcType="INTEGER" />
+    <result column="w_info_gun_weight" property="wInfoGunWeight" jdbcType="DOUBLE" />
+    <result column="w_info_cassette_capacitance" property="wInfoCassetteCapacitance" jdbcType="INTEGER" />
+    <result column="w_info_speed" property="wInfoSpeed" jdbcType="INTEGER" />
+    <result column="w_info_gunshot" property="wInfoGunshot" jdbcType="INTEGER" />
+    <result column="w_info_made" property="wInfoMade" jdbcType="INTEGER" />
+    <result column="w_info_campaign_f" property="wInfoCampaignF" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    w_info_id, w_info_name, type_id, w_info_model_id, w_info_gun_type, w_info_gun_caliber, 
+    w_info_gun_length, w_info_chamber_length, w_info_gun_weight, w_info_cassette_capacitance, 
+    w_info_speed, w_info_gunshot, w_info_made, w_info_campaign_f
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from T_weapon_gun_info
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_weapon_gun_info
+    where w_info_id = #{wInfoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_weapon_gun_info
+    where w_info_id = #{wInfoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.T_weapon_gun_info" >
+    insert into t_weapon_gun_info (w_info_id, w_info_name, type_id, 
+      w_info_model_id, w_info_gun_type, w_info_gun_caliber, 
+      w_info_gun_length, w_info_chamber_length, w_info_gun_weight, 
+      w_info_cassette_capacitance, w_info_speed, w_info_gunshot, 
+      w_info_made, w_info_campaign_f)
+    values (#{wInfoId,jdbcType=INTEGER}, #{wInfoName,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, 
+      #{wInfoModelId,jdbcType=VARCHAR}, #{wInfoGunType,jdbcType=INTEGER}, #{wInfoGunCaliber,jdbcType=DOUBLE}, 
+      #{wInfoGunLength,jdbcType=INTEGER}, #{wInfoChamberLength,jdbcType=INTEGER}, #{wInfoGunWeight,jdbcType=DOUBLE}, 
+      #{wInfoCassetteCapacitance,jdbcType=INTEGER}, #{wInfoSpeed,jdbcType=INTEGER}, #{wInfoGunshot,jdbcType=INTEGER}, 
+      #{wInfoMade,jdbcType=INTEGER}, #{wInfoCampaignF,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.T_weapon_gun_info" useGeneratedKeys="true" keyProperty="wInfoId">
+    insert into t_weapon_gun_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wInfoId != null" >
+        w_info_id,
+      </if>
+      <if test="wInfoName != null" >
+        w_info_name,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="wInfoModelId != null" >
+        w_info_model_id,
+      </if>
+      <if test="wInfoGunType != null" >
+        w_info_gun_type,
+      </if>
+      <if test="wInfoGunCaliber != null" >
+        w_info_gun_caliber,
+      </if>
+      <if test="wInfoGunLength != null" >
+        w_info_gun_length,
+      </if>
+      <if test="wInfoChamberLength != null" >
+        w_info_chamber_length,
+      </if>
+      <if test="wInfoGunWeight != null" >
+        w_info_gun_weight,
+      </if>
+      <if test="wInfoCassetteCapacitance != null" >
+        w_info_cassette_capacitance,
+      </if>
+      <if test="wInfoSpeed != null" >
+        w_info_speed,
+      </if>
+      <if test="wInfoGunshot != null" >
+        w_info_gunshot,
+      </if>
+      <if test="wInfoMade != null" >
+        w_info_made,
+      </if>
+      <if test="wInfoCampaignF != null" >
+        w_info_campaign_f,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wInfoId != null" >
+        #{wInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoName != null" >
+        #{wInfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoModelId != null" >
+        #{wInfoModelId,jdbcType=VARCHAR},
+      </if>
+      <if test="wInfoGunType != null" >
+        #{wInfoGunType,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoGunCaliber != null" >
+        #{wInfoGunCaliber,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoGunLength != null" >
+        #{wInfoGunLength,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoChamberLength != null" >
+        #{wInfoChamberLength,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoGunWeight != null" >
+        #{wInfoGunWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoCassetteCapacitance != null" >
+        #{wInfoCassetteCapacitance,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoSpeed != null" >
+        #{wInfoSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoGunshot != null" >
+        #{wInfoGunshot,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoMade != null" >
+        #{wInfoMade,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoCampaignF != null" >
+        #{wInfoCampaignF,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.T_weapon_gun_info" >
+    update t_weapon_gun_info
+    <set >
+      <if test="wInfoName != null" >
+        w_info_name = #{wInfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoModelId != null" >
+        w_info_model_id = #{wInfoModelId,jdbcType=VARCHAR},
+      </if>
+      <if test="wInfoGunType != null" >
+        w_info_gun_type = #{wInfoGunType,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoGunCaliber != null" >
+        w_info_gun_caliber = #{wInfoGunCaliber,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoGunLength != null" >
+        w_info_gun_length = #{wInfoGunLength,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoChamberLength != null" >
+        w_info_chamber_length = #{wInfoChamberLength,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoGunWeight != null" >
+        w_info_gun_weight = #{wInfoGunWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="wInfoCassetteCapacitance != null" >
+        w_info_cassette_capacitance = #{wInfoCassetteCapacitance,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoSpeed != null" >
+        w_info_speed = #{wInfoSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoGunshot != null" >
+        w_info_gunshot = #{wInfoGunshot,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoMade != null" >
+        w_info_made = #{wInfoMade,jdbcType=INTEGER},
+      </if>
+      <if test="wInfoCampaignF != null" >
+        w_info_campaign_f = #{wInfoCampaignF,jdbcType=INTEGER},
+      </if>
+    </set>
+    where w_info_id = #{wInfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.T_weapon_gun_info" >
+    update t_weapon_gun_info
+    set w_info_name = #{wInfoName,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      w_info_model_id = #{wInfoModelId,jdbcType=VARCHAR},
+      w_info_gun_type = #{wInfoGunType,jdbcType=INTEGER},
+      w_info_gun_caliber = #{wInfoGunCaliber,jdbcType=DOUBLE},
+      w_info_gun_length = #{wInfoGunLength,jdbcType=INTEGER},
+      w_info_chamber_length = #{wInfoChamberLength,jdbcType=INTEGER},
+      w_info_gun_weight = #{wInfoGunWeight,jdbcType=DOUBLE},
+      w_info_cassette_capacitance = #{wInfoCassetteCapacitance,jdbcType=INTEGER},
+      w_info_speed = #{wInfoSpeed,jdbcType=INTEGER},
+      w_info_gunshot = #{wInfoGunshot,jdbcType=INTEGER},
+      w_info_made = #{wInfoMade,jdbcType=INTEGER},
+      w_info_campaign_f = #{wInfoCampaignF,jdbcType=INTEGER}
+    where w_info_id = #{wInfoId,jdbcType=INTEGER}
+  </update>
+</mapper>

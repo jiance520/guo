@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.T_troops_uintMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.T_troops_uint" >
+    <id column="unit_id" property="unitId" jdbcType="INTEGER" />
+    <id column="bu_id" property="buId" jdbcType="INTEGER" />
+    <id column="unit_child_id" property="unitChildId" jdbcType="INTEGER" />
+    <id column="unit_child_order" property="unitChildOrder" jdbcType="INTEGER" />
+    <result column="unit_is_basic" property="unitIsBasic" jdbcType="TINYINT" />
+    <result column="unit_name" property="unitName" jdbcType="VARCHAR" />
+    <result column="bu_level" property="buLevel" jdbcType="INTEGER" />
+    <result column="bu_unit_type" property="buUnitType" jdbcType="INTEGER" />
+    <result column="unit_info_campaign_f" property="unitInfoCampaignF" jdbcType="INTEGER" />
+    <result column="unit_child_name" property="unitChildName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    unit_id, bu_id, unit_child_id, unit_child_order, unit_is_basic, unit_name, bu_level, 
+    bu_unit_type, unit_info_campaign_f, unit_child_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_troops_uint
+    <where>
+      <if test="unitId != null">
+        unit_id = #{unitId,jdbcType=INTEGER}
+      </if>
+      <if test="buId != null">
+        and bu_id = #{buId,jdbcType=INTEGER}
+      </if>
+      <if test="unitChildId != null">
+        and unit_child_id = #{unitChildId,jdbcType=INTEGER}
+      </if>
+      <if test="unitChildOrder != null">
+        and unit_child_order = #{unitChildOrder,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from t_troops_uint
+    <where>
+      <if test="unitId != null">
+        unit_id = #{unitId,jdbcType=INTEGER}
+      </if>
+      <if test="buId != null">
+        and bu_id = #{buId,jdbcType=INTEGER}
+      </if>
+      <if test="unitChildId != null">
+        and unit_child_id = #{unitChildId,jdbcType=INTEGER}
+      </if>
+      <if test="unitChildOrder != null">
+        and unit_child_order = #{unitChildOrder,jdbcType=INTEGER}
+      </if>
+    </where>
+  </delete>
+  <insert id="insert" parameterType="guo.entity.T_troops_uint" >
+    insert into t_troops_uint (unit_id, bu_id, unit_child_id, 
+      unit_child_order, unit_is_basic, unit_name, 
+      bu_level, bu_unit_type, unit_info_campaign_f, 
+      unit_child_name)
+    values (#{unitId,jdbcType=INTEGER}, #{buId,jdbcType=INTEGER}, #{unitChildId,jdbcType=INTEGER}, 
+      #{unitChildOrder,jdbcType=INTEGER}, #{unitIsBasic,jdbcType=TINYINT}, #{unitName,jdbcType=VARCHAR}, 
+      #{buLevel,jdbcType=INTEGER}, #{buUnitType,jdbcType=INTEGER}, #{unitInfoCampaignF,jdbcType=INTEGER}, 
+      #{unitChildName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.T_troops_uint">
+    insert into t_troops_uint
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="unitId != null" >
+        unit_id,
+      </if>
+      <if test="buId != null" >
+        bu_id,
+      </if>
+      <if test="unitChildId != null" >
+        unit_child_id,
+      </if>
+      <if test="unitChildOrder != null" >
+        unit_child_order,
+      </if>
+      <if test="unitIsBasic != null" >
+        unit_is_basic,
+      </if>
+      <if test="unitName != null" >
+        unit_name,
+      </if>
+      <if test="buLevel != null" >
+        bu_level,
+      </if>
+      <if test="buUnitType != null" >
+        bu_unit_type,
+      </if>
+      <if test="unitInfoCampaignF != null" >
+        unit_info_campaign_f,
+      </if>
+      <if test="unitChildName != null" >
+        unit_child_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="unitId != null" >
+        #{unitId,jdbcType=INTEGER},
+      </if>
+      <if test="buId != null" >
+        #{buId,jdbcType=INTEGER},
+      </if>
+      <if test="unitChildId != null" >
+        #{unitChildId,jdbcType=INTEGER},
+      </if>
+      <if test="unitChildOrder != null" >
+        #{unitChildOrder,jdbcType=INTEGER},
+      </if>
+      <if test="unitIsBasic != null" >
+        #{unitIsBasic,jdbcType=TINYINT},
+      </if>
+      <if test="unitName != null" >
+        #{unitName,jdbcType=VARCHAR},
+      </if>
+      <if test="buLevel != null" >
+        #{buLevel,jdbcType=INTEGER},
+      </if>
+      <if test="buUnitType != null" >
+        #{buUnitType,jdbcType=INTEGER},
+      </if>
+      <if test="unitInfoCampaignF != null" >
+        #{unitInfoCampaignF,jdbcType=INTEGER},
+      </if>
+      <if test="unitChildName != null" >
+        #{unitChildName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.T_troops_uint" >
+    update t_troops_uint
+    <set >
+      <if test="unitIsBasic != null" >
+        unit_is_basic = #{unitIsBasic,jdbcType=TINYINT},
+      </if>
+      <if test="unitName != null" >
+        unit_name = #{unitName,jdbcType=VARCHAR},
+      </if>
+      <if test="buLevel != null" >
+        bu_level = #{buLevel,jdbcType=INTEGER},
+      </if>
+      <if test="buUnitType != null" >
+        bu_unit_type = #{buUnitType,jdbcType=INTEGER},
+      </if>
+      <if test="unitInfoCampaignF != null" >
+        unit_info_campaign_f = #{unitInfoCampaignF,jdbcType=INTEGER},
+      </if>
+      <if test="unitChildName != null" >
+        unit_child_name = #{unitChildName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where unit_id = #{unitId,jdbcType=INTEGER}
+      and bu_id = #{buId,jdbcType=INTEGER}
+      and unit_child_id = #{unitChildId,jdbcType=INTEGER}
+      and unit_child_order = #{unitChildOrder,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.T_troops_uint" >
+    update t_troops_uint
+    set unit_is_basic = #{unitIsBasic,jdbcType=TINYINT},
+      unit_name = #{unitName,jdbcType=VARCHAR},
+      bu_level = #{buLevel,jdbcType=INTEGER},
+      bu_unit_type = #{buUnitType,jdbcType=INTEGER},
+      unit_info_campaign_f = #{unitInfoCampaignF,jdbcType=INTEGER},
+      unit_child_name = #{unitChildName,jdbcType=VARCHAR}
+    where unit_id = #{unitId,jdbcType=INTEGER}
+      and bu_id = #{buId,jdbcType=INTEGER}
+      and unit_child_id = #{unitChildId,jdbcType=INTEGER}
+      and unit_child_order = #{unitChildOrder,jdbcType=INTEGER}
+  </update>
+</mapper>

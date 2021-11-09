@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.T_troops_unitkindMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.T_troops_unitkind" >
+    <id column="unitkind_id" property="unitkindId" jdbcType="INTEGER" />
+    <result column="unitkind_name" property="unitkindName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    unitkind_id, unitkind_name
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from T_troops_unitkind
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_troops_unitkind
+    where unitkind_id = #{unitkindId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_troops_unitkind
+    where unitkind_id = #{unitkindId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.T_troops_unitkind" >
+    insert into t_troops_unitkind (unitkind_id, unitkind_name)
+    values (#{unitkindId,jdbcType=INTEGER}, #{unitkindName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.T_troops_unitkind" useGeneratedKeys="true" keyProperty="unitkindId">
+    insert into t_troops_unitkind
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="unitkindId != null" >
+        unitkind_id,
+      </if>
+      <if test="unitkindName != null" >
+        unitkind_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="unitkindId != null" >
+        #{unitkindId,jdbcType=INTEGER},
+      </if>
+      <if test="unitkindName != null" >
+        #{unitkindName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.T_troops_unitkind" >
+    update t_troops_unitkind
+    <set >
+      <if test="unitkindName != null" >
+        unitkind_name = #{unitkindName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where unitkind_id = #{unitkindId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.T_troops_unitkind" >
+    update t_troops_unitkind
+    set unitkind_name = #{unitkindName,jdbcType=VARCHAR}
+    where unitkind_id = #{unitkindId,jdbcType=INTEGER}
+  </update>
+</mapper>

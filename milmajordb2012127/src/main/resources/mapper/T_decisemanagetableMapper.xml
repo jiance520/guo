@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.T_decisemanagetableMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.T_decisemanagetable" >
+    <id column="deciseID" property="deciseid" jdbcType="INTEGER" />
+    <result column="deciseName" property="decisename" jdbcType="CHAR" />
+    <result column="redblueF" property="redbluef" jdbcType="INTEGER" />
+    <result column="deciseAuthorName" property="deciseauthorname" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    deciseID, deciseName, redblueF, deciseAuthorName
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from T_decisemanagetable
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_decisemanagetable
+    where deciseID = #{deciseid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_decisemanagetable
+    where deciseID = #{deciseid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.T_decisemanagetable" >
+    insert into t_decisemanagetable (deciseID, deciseName, redblueF, 
+      deciseAuthorName)
+    values (#{deciseid,jdbcType=INTEGER}, #{decisename,jdbcType=CHAR}, #{redbluef,jdbcType=INTEGER}, 
+      #{deciseauthorname,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.T_decisemanagetable" useGeneratedKeys="true" keyProperty="deciseid">
+    insert into t_decisemanagetable
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deciseid != null" >
+        deciseID,
+      </if>
+      <if test="decisename != null" >
+        deciseName,
+      </if>
+      <if test="redbluef != null" >
+        redblueF,
+      </if>
+      <if test="deciseauthorname != null" >
+        deciseAuthorName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deciseid != null" >
+        #{deciseid,jdbcType=INTEGER},
+      </if>
+      <if test="decisename != null" >
+        #{decisename,jdbcType=CHAR},
+      </if>
+      <if test="redbluef != null" >
+        #{redbluef,jdbcType=INTEGER},
+      </if>
+      <if test="deciseauthorname != null" >
+        #{deciseauthorname,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.T_decisemanagetable" >
+    update t_decisemanagetable
+    <set >
+      <if test="decisename != null" >
+        deciseName = #{decisename,jdbcType=CHAR},
+      </if>
+      <if test="redbluef != null" >
+        redblueF = #{redbluef,jdbcType=INTEGER},
+      </if>
+      <if test="deciseauthorname != null" >
+        deciseAuthorName = #{deciseauthorname,jdbcType=CHAR},
+      </if>
+    </set>
+    where deciseID = #{deciseid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.T_decisemanagetable" >
+    update t_decisemanagetable
+    set deciseName = #{decisename,jdbcType=CHAR},
+      redblueF = #{redbluef,jdbcType=INTEGER},
+      deciseAuthorName = #{deciseauthorname,jdbcType=CHAR}
+    where deciseID = #{deciseid,jdbcType=INTEGER}
+  </update>
+</mapper>

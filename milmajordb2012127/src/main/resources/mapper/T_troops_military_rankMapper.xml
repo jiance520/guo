@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guo.dao.T_troops_military_rankMapper" >
+  <resultMap id="BaseResultMap" type="guo.entity.T_troops_military_rank" >
+    <id column="mrank_id" property="mrankId" jdbcType="INTEGER" />
+    <result column="mrank_name" property="mrankName" jdbcType="VARCHAR" />
+    <result column="mrank_description" property="mrankDescription" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mrank_id, mrank_name, mrank_description
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from T_troops_military_rank
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_troops_military_rank
+    where mrank_id = #{mrankId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_troops_military_rank
+    where mrank_id = #{mrankId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="guo.entity.T_troops_military_rank" >
+    insert into t_troops_military_rank (mrank_id, mrank_name, mrank_description
+      )
+    values (#{mrankId,jdbcType=INTEGER}, #{mrankName,jdbcType=VARCHAR}, #{mrankDescription,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="guo.entity.T_troops_military_rank" useGeneratedKeys="true" keyProperty="mrankId">
+    insert into t_troops_military_rank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mrankId != null" >
+        mrank_id,
+      </if>
+      <if test="mrankName != null" >
+        mrank_name,
+      </if>
+      <if test="mrankDescription != null" >
+        mrank_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mrankId != null" >
+        #{mrankId,jdbcType=INTEGER},
+      </if>
+      <if test="mrankName != null" >
+        #{mrankName,jdbcType=VARCHAR},
+      </if>
+      <if test="mrankDescription != null" >
+        #{mrankDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="guo.entity.T_troops_military_rank" >
+    update t_troops_military_rank
+    <set >
+      <if test="mrankName != null" >
+        mrank_name = #{mrankName,jdbcType=VARCHAR},
+      </if>
+      <if test="mrankDescription != null" >
+        mrank_description = #{mrankDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mrank_id = #{mrankId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guo.entity.T_troops_military_rank" >
+    update t_troops_military_rank
+    set mrank_name = #{mrankName,jdbcType=VARCHAR},
+      mrank_description = #{mrankDescription,jdbcType=VARCHAR}
+    where mrank_id = #{mrankId,jdbcType=INTEGER}
+  </update>
+</mapper>
